@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "string": "cpp",
+        "xstring": "cpp",
+        "algorithm": "cpp",
+        "vector": "cpp",
+        "xutility": "cpp",
+        "xmemory": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp",
+        "xstddef": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "set": "cpp",
+        "xtree": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "queue": "cpp",
+        "xlocnum": "cpp",
+        "xtr1common": "cpp",
+        "atomic": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "xlocale": "cpp",
+        "map": "cpp",
+        "functional": "cpp"
+    }
+}
