@@ -1,3 +1,5 @@
+use std::fmt::{Debug, Display};
+
 pub trait Summary {
     fn summarize(&self) -> String {
         String::from("(Read more ...)")
@@ -34,6 +36,10 @@ impl Summary for Tweet {
 //     println!("Breaking news! {}", item.summarize());
 // }
 
-pub fn notify<T: Summary>(item: T) {
-    println!("Breaking news! {}", item.summarize());
+pub fn notify<T, U>(a: T, b: U) -> String
+where
+    T: Summary + Display,
+    U: Clone + Debug,
+{
+    format!("Breaking news! {}", a.summarize())
 }

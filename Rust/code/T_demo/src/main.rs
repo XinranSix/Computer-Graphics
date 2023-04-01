@@ -1,6 +1,6 @@
-fn largest<T>(list: &[T]) -> T {
-    let mut largest = list[0];
-    for &item in list {
+fn largest<T: PartialOrd + Clone>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list.iter() {
         if item > largest {
             largest = item;
         }
@@ -8,6 +8,4 @@ fn largest<T>(list: &[T]) -> T {
     largest
 }
 
-fn main() {
-    
-}
+fn main() {}
