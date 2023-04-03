@@ -1,0 +1,3 @@
+D:/Computer-Graphics/GAMES101/homework/pa0/out/build/x64-Debug/CMakeFiles/Transformation.dir
+D:/Computer-Graphics/GAMES101/homework/pa0/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/Computer-Graphics/GAMES101/homework/pa0/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
