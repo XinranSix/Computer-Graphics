@@ -3,6 +3,30 @@
 #include<eigen3/Eigen/Dense>
 #include<iostream>
 
+void fn() {
+    Eigen::Vector3f p(2.0f, 1.0f, 1.0f);
+    Eigen::Matrix3f r, t;
+    float PI = std::acos(-1);
+    float cos_value = std::cos(45.0f / 180 * PI);
+    float sin_value = std::sin(45.0f / 180 * PI);
+
+    r <<
+        cos_value, -sin_value, 0,
+        sin_value, cos_value, 0,
+        0, 0, 1;
+    t <<
+        1, 0, 1,
+        0, 1, 2,
+        0, 0, 1;
+
+  /*  std::cout << "\n" << t * r << std::endl;*/
+
+    p = t * r * p;
+
+    
+    std::cout << "\n" << p << std::endl;
+}
+
 int main(){
 
     // Basic Example of cpp
@@ -43,6 +67,8 @@ int main(){
     // matrix scalar multiply i * 2.0
     // matrix multiply i * j
     // matrix multiply vector i * v
+
+    fn();
 
     return 0;
 }
