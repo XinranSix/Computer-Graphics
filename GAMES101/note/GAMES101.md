@@ -6,7 +6,7 @@
 
 1. Direction and length.
 2. No absolute starting position.
-3. Magnitude (length): $\|\vec{a}\|$.
+3. Magnitude (length): $\left\|\vec{a} \right\|$.
 4. Unit vector: $\vec{a}$ is a unit vector $\Leftrightarrow$ $\|\vec{a}\| = 1$.
 5. Vector Normalization: find the unit vector of $\vec{a}$: $\hat{a}= \frac{\vec{a}}{\|\vec{a}\|}$.
 6. The unit vector is used to represent directions.
@@ -32,7 +32,7 @@ x & y
 $$
 
 $$
-\|\mathbf{A}\|=\sqrt{x^2+y^2}
+\left\| A\right\|=\sqrt{x^2+y^2}
 $$
 
 ### Vector Multiplication
@@ -95,7 +95,7 @@ Dot Product in Graphics：
 <img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/8919/image-20230228183811832.png" alt="image-20230228183811832" style="zoom:50%;" />
 
 $$
-\vec{b}_{\perp}=k \hat{a} \\
+\overrightarrow{b}_{\perp}=k \hat{a} \\
 k=\left\|\vec{b}_{\perp}\right\|=\|\vec{b}\| \cos \theta
 $$
 
@@ -118,7 +118,7 @@ $$
 Properties:
 
 -   $\vec{a} \times \vec{b}=-\vec{b} \times \vec{a}$
--   $\vec{a} \times \vec{a}=\overrightarrow{0}$
+-   $\vec{a} \times \vec{a}=\vec{0}$
 -   $\vec{a} \times(\vec{b}+\vec{c})=\vec{a} \times \vec{b}+\vec{a} \times \vec{c}$
 -   $\vec{a} \times(k \vec{b})=k(\vec{a} \times \vec{b})$
 
@@ -133,11 +133,18 @@ x_a y_b-y_a x_b
 $$
 
 $$
-\vec{a} \times \vec{b}=A^* b=\left[\begin{array}{c}0 & -z_a & y_a  \\ z_a & 0 & -x_a \\ -y_a & x_a & 0\end{array}\right]\left[\begin{array}{l}
+\vec{a} \times \vec{b}=A^* b=
+\begin{bmatrix}
+0 & -z_a & y_a  \\ 
+z_a & 0 & -x_a \\ 
+-y_a & x_a & 0
+\end{bmatrix}
+
+\begin{bmatrix}
 x_b \\
 y_b \\
 z_b
-\end{array}\right]
+\end{bmatrix}
 $$
 
 Call $A^*$ the dual matrix of vector a.
@@ -176,11 +183,11 @@ $\vec{p} \cdot \vec{u}$ is the projection of $\vec{p}$ on $\vec{u}$.
 Matrix is an array of numbers.
 
 $$
-\left[\begin{array}{l}
+\begin{bmatrix}
 1 & 3 \\
 5 & 2 \\
 0 & 4
-\end{array}\right]
+\end{bmatrix}
 $$
 
 Addition and multiplication by a scalar are trivial: element by element
@@ -223,10 +230,11 @@ Treat vector as a column matrix ($m \times 1$).
 for example: 2D reflection about y-axis:
 
 $$
-\left[\begin{array}{c}
+\begin{bmatrix}
 -1 & 0 \\
 0 & 1
-\end{array}\right] \left[\begin{array}{c}
+\end{bmatrix}
+\left[\begin{array}{c}
 x  \\
 y
 \end{array}\right]=\left[\begin{array}{c}
