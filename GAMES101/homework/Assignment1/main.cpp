@@ -123,7 +123,7 @@ Eigen::Matrix4f get_rotation(Vector3f axis, float angle) {
         rotation(1, 0), rotation(1, 1), rotation(1, 2), 0,
         rotation(2, 0), rotation(2, 1), rotation(2, 2), 0,
         0, 0, 0, 1;
-    std::cout << res << std::endl;
+    // std::cout << res << std::endl;
     return res;
 }
 

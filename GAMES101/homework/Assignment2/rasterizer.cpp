@@ -127,10 +127,10 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     int x_max = std::max(std::max(v[0][0], v[1][0]), v[2][0]);
     float y_min = std::min(std::min(v[0][1], v[1][1]), v[2][1]);
     int y_max = std::max(std::max(v[0][1], v[1][1]), v[2][1]);
+
     // iterate through the pixel and find if the current pixel is inside the triangle
     for (int x = x_min; x < x_max; ++x) {
         for (int y = y_min; y < y_max; ++y) {
-            // std::cout << "x: " << x << " y: " << y << std::endl;
             if (insideTriangle(x, y, t.v)) {
                 // If so, use the following code to get the interpolated z value.
                   auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
