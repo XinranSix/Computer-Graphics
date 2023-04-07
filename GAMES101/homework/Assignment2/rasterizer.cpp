@@ -123,10 +123,10 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     auto v = t.toVector4();
     
     // TODO : Find out the bounding box of current triangle.
-    float x_min = std::min(std::min(v[0][0], v[1][0]), v[2][0]);
-    int x_max = std::max(std::max(v[0][0], v[1][0]), v[2][0]);
-    float y_min = std::min(std::min(v[0][1], v[1][1]), v[2][1]);
-    int y_max = std::max(std::max(v[0][1], v[1][1]), v[2][1]);
+    double x_min = std::min(std::min(v[0][0], v[1][0]), v[2][0]);
+    double x_max = std::max(std::max(v[0][0], v[1][0]), v[2][0]);
+    double y_min = std::min(std::min(v[0][1], v[1][1]), v[2][1]);
+    double y_max = std::max(std::max(v[0][1], v[1][1]), v[2][1]);
 
     // iterate through the pixel and find if the current pixel is inside the triangle
     for (int x = x_min; x < x_max; ++x) {

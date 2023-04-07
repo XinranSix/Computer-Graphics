@@ -60,7 +60,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     float r = t * aspect_ratio;
     float l = -r;
 
-    Eigen::Matrix4f persp_to_ortho, T, S;
+   /* Eigen::Matrix4f persp_to_ortho, T, S;
 
     persp_to_ortho <<
         zNear, 0, 0, 0,
@@ -80,7 +80,18 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
         0, 0, 2 / (zNear - zFar), 0,
         0, 0, 0, 1;
 
-    projection = S * T * persp_to_ortho * projection;
+    projection = S * T * persp_to_ortho * projection;*/
+
+
+    Eigen::Matrix4f m1;
+
+    m1 <<
+        zNear / r, 0, 0, 0,
+        0, zNear / r, 0, 0,
+        0, 0, -(zFar + zNear) / (zFar - zNear), -(2 * zNear * zFar) / (zFar - zNear),
+        0, 0, -1, 0;
+
+    projection = m1 * projection;
 
     return projection;
 }
@@ -176,7 +187,7 @@ int main(int argc, const char** argv)
     while (key != 27) {
         r.clear(rst::Buffers::Color | rst::Buffers::Depth);
 
-        /*Vector3f axis(0, 1, 0);
+      /*  Vector3f axis(1, 0, 0);
         r.set_model(get_rotation(axis, angle));*/
         r.set_model(get_model_matrix(angle));
         r.set_view(get_view_matrix(eye_pos));

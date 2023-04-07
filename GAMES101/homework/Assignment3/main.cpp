@@ -52,32 +52,20 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     // TODO: Use the same projection matrix from the previous assignments
     Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
 
-    float t = std::abs(zNear) * std::tan(eye_fov / 180.0f * MY_PI / 2);
+    float t = zNear * std::tan(eye_fov / 180.0f * MY_PI / 2);
     float b = -t;
     float r = t * aspect_ratio;
     float l = -r;
 
-    Eigen::Matrix4f persp_to_ortho, T, S;
+    Eigen::Matrix4f m1;
 
-    persp_to_ortho <<
-        zNear, 0, 0, 0,
-        0, zNear, 0, 0,
-        0, 0, zNear + zFar, -zNear * zFar,
-        0, 0, 1, 0;
+    m1 <<
+        zNear / r, 0, 0, 0,
+        0, zNear / r, 0, 0,
+        0, 0, -(zFar + zNear) / (zFar - zNear), -(2 * zNear * zFar) / (zFar - zNear),
+        0, 0, -1, 0;
 
-    T <<
-        1, 0, 0, -(l + r) / 2,
-        0, 1, 0, -(t + b) / 2,
-        0, 0, 1, -(zNear + zFar) / 2,
-        0, 0, 0, 1;
-
-    S <<
-        2 / (r - l), 0, 0, 0,
-        0, 2 / (t - b), 0, 0,
-        0, 0, 2 / (zNear - zFar), 0,
-        0, 0, 0, 1;
-
-    projection = S * T * persp_to_ortho * projection;
+    projection = m1 * projection;
 
     return projection;
 }
@@ -276,10 +264,10 @@ int main(int argc, const char** argv)
 
     std::string filename = "output.png";
     objl::Loader Loader;
-    std::string obj_path = "../models/spot/";
+    std::string obj_path = "D:/Computer-Graphics/GAMES101/homework/Assignment3/models/spot/";
 
     // Load .obj File
-    bool loadout = Loader.LoadFile("../models/spot/spot_triangulated_good.obj");
+    bool loadout = Loader.LoadFile("D:/Computer-Graphics/GAMES101/homework/Assignment3/models/spot/spot_triangulated_good.obj");
     for(auto mesh:Loader.LoadedMeshes)
     {
         for(int i=0;i<mesh.Vertices.size();i+=3)
