@@ -259,6 +259,33 @@ static Eigen::Vector2f interpolate(float alpha, float beta, float gamma, const E
 //Screen space rasterization
 void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eigen::Vector3f, 3>& view_pos) 
 {
+    auto v = t.toVector4();
+
+    // TODO : Find out the bounding box of current triangle.
+    float x_min = std::min(std::min(v[0][0], v[1][0]), v[2][0]);
+    int x_max = std::max(std::max(v[0][0], v[1][0]), v[2][0]);
+    float y_min = std::min(std::min(v[0][1], v[1][1]), v[2][1]);
+    int y_max = std::max(std::max(v[0][1], v[1][1]), v[2][1]);
+
+    // iterate through the pixel and find if the current pixel is inside the triangle
+    for (int x = x_min; x < x_max; ++x) {
+        for (int y = y_min; y < y_max; ++y) {
+            if (insideTriangle(x, y, t.v)) {
+                // If so, use the following code to get the interpolated z value.
+                auto [alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+                float w_reciprocal = 1.0 / (alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+                float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+                z_interpolated *= w_reciprocal;
+
+                if (z_interpolated < depth_buf[get_index(x, y)]) {
+                    depth_buf[get_index(x, y)] = z_interpolated;
+                    // TODO : set the current pixel (use the set_pixel function) to the color of the triangle (use getColor function) if it should be painted.
+                    // set_pixel(Eigen::Vector3f(x, y, 1.0f), t.getColor());
+                }
+            }
+        }
+    }
+
     // TODO: From your HW3, get the triangle rasterization code.
     // TODO: Inside your rasterization loop:
     //    * v[i].w() is the vertex view space depth value z.
