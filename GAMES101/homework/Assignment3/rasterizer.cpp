@@ -301,15 +301,6 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
             }
         }
     }
- 
-   
-
- 
-
-  
-
-
-
 }
 
 void rst::rasterizer::set_model(const Eigen::Matrix4f& m)
