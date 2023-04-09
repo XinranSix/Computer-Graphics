@@ -1,3 +1,0 @@
-D:/Computer-Graphics/GAMES101/homework/Assignment1/out/build/x64-Debug/CMakeFiles/Rasterizer.dir
-D:/Computer-Graphics/GAMES101/homework/Assignment1/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-D:/Computer-Graphics/GAMES101/homework/Assignment1/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
