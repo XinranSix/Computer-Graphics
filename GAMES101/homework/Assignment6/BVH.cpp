@@ -105,5 +105,24 @@ Intersection BVHAccel::Intersect(const Ray& ray) const
 Intersection BVHAccel::getIntersection(BVHBuildNode* node, const Ray& ray) const
 {
     // TODO Traverse the BVH to find intersection
+    std::array<int, 3> dirIsNeg;
+    dirIsNeg[0] = (ray.direction[0] > 0);
+    dirIsNeg[1] = (ray.direction[1] > 0);
+    dirIsNeg[2] = (ray.direction[2] > 0);
+    Intersection inter;
+    // 对于任意结点，如果其boundbox与光线无交点，则不需进一步的判断，
+    // 否则依次递归，直到叶子节点，判断叶子节点中存的各个物体如三角形、球形等是否与光线有交点
+    if (!node->bounds.IntersectP(ray, ray.direction_inv, dirIsNeg)) {
+        return inter;
+    }
+    if (node->left == nullptr && node->right == nullptr) {
+        return node->object->getIntersection(ray);
+    }
 
+    Intersection l = getIntersection(node->left, ray);
+    Intersection r = getIntersection(node->right, ray);
+    // 返回距离光源进的物体的相交信息
+    return l.distance < r.distance ? l : r;
+
+    // return inter;
 }
