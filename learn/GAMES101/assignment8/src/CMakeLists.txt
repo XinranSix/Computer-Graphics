@@ -30,7 +30,7 @@ link_directories(
 #-------------------------------------------------------------------------------
 # Add executable
 #-------------------------------------------------------------------------------
-add_executable(ropesim ${APPLICATION_SOURCE})
+add_executable(ropesim ${APPLICATION_SOURCE} "unistd.h")
 
 target_link_libraries( ropesim
     CGL ${CGL_LIBRARIES}

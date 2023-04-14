@@ -26,3 +26,7 @@
 /**/out
 /**/build
 /**/logs
+/**/bin
+/**/Debug
+/**/debug
+/**/cmake-build-debug

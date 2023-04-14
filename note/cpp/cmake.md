@@ -312,3 +312,33 @@ install(DIRECTORY doc/ DESTINATION doc)
 cmake --install .					# 安装到默认目录 CMAKE_INSTALL_PREFIX
 cmake --install . --prefix <dir>	# 安装到指定目录
 ```
+
+
+
+## 分目录
+
+## 配置 1
+
+主目录
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+
+project(RT)
+
+add_subdirectory (src)
+```
+
+子目录
+
+```cmake
+aux_source_directory (. SRC_LIST)
+
+include_directories (../include)
+
+add_executable (main ${SRC_LIST})
+
+set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+```
+
+## 配置 2
