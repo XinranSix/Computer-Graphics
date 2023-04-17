@@ -1,3 +1,3 @@
 git add .
-git commit -m "ç¡è§‰å‰ä»£ç å¤‡ä»½"
+git commit -m "Ë¯¾õÇ°´úÂë±¸·İ"
 git push
