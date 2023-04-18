@@ -3,24 +3,31 @@
 #include <iostream>
 #include <vector>
 
-#include <stb_image.h>
+#include "stb_image.h"
 
-GLuint loadTexture2D(const std::string &file, bool repeat) {
+GLuint loadTexture2D(const std::string &file, bool repeat)
+{
   GLuint textureID;
   glGenTextures(1, &textureID);
 
   int width, height, comp;
   unsigned char *data = stbi_load(file.c_str(), &width, &height, &comp, 0);
-  if (data) {
+  if (data)
+  {
     GLenum format;
     GLenum internalFormat;
-    if (comp == 1) {
+    if (comp == 1)
+    {
       format = GL_RED;
       internalFormat = GL_RED;
-    } else if (comp == 3) {
+    }
+    else if (comp == 3)
+    {
       format = GL_RGB;
       internalFormat = GL_SRGB;
-    } else if (comp == 4) {
+    }
+    else if (comp == 4)
+    {
       format = GL_RGBA;
       internalFormat = GL_SRGB_ALPHA;
     }
@@ -39,7 +46,9 @@ GLuint loadTexture2D(const std::string &file, bool repeat) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     stbi_image_free(data);
-  } else {
+  }
+  else
+  {
     std::cout << "ERROR: Failed to load texture at: " << file << std::endl;
     stbi_image_free(data);
   }
@@ -47,8 +56,9 @@ GLuint loadTexture2D(const std::string &file, bool repeat) {
   return textureID;
 }
 
-GLuint loadCubemap(const std::string &cubemapDir) {
-  const std::vector<std::string> faces = {"right",  "left",  "top",
+GLuint loadCubemap(const std::string &cubemapDir)
+{
+  const std::vector<std::string> faces = {"right", "left", "top",
                                           "bottom", "front", "back"};
 
   GLuint textureID;
@@ -56,15 +66,19 @@ GLuint loadCubemap(const std::string &cubemapDir) {
   glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
   int width, height, comp;
-  for (GLuint i = 0; i < faces.size(); i++) {
+  for (GLuint i = 0; i < faces.size(); i++)
+  {
     unsigned char *data =
         stbi_load((cubemapDir + "/" + faces[i] + ".png").c_str(), &width,
                   &height, &comp, 0);
-    if (data) {
+    if (data)
+    {
       glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_SRGB, width,
                    height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
       stbi_image_free(data);
-    } else {
+    }
+    else
+    {
       std::cout << "Cubemap texture failed to load at path: "
                 << (cubemapDir + "/" + faces[i] + ".png").c_str() << std::endl;
       stbi_image_free(data);
