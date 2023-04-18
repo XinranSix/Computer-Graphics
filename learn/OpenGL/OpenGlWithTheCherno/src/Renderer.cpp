@@ -4,6 +4,8 @@
 
 
 #include "Renderer.h"
+#include <GL/glew.h>
+#include <fmt/core.h>
 
 void GLClearError() {
     while (glGetError() != GL_NO_ERROR);

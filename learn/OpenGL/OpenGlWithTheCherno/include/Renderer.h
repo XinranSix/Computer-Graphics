@@ -4,11 +4,6 @@
 
 #pragma once
 
-#include <GL/glew.h>
-#include <fmt/core.h>
-#include <iostream>
-#include <sstream>
-
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"

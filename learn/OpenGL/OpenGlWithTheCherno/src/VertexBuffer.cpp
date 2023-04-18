@@ -2,8 +2,8 @@
 // Created by yaojie on 2023/4/17.
 //
 
-#include "VertexBuffer.h"
 #include "Renderer.h"
+#include <GL/glew.h>
 
 VertexBuffer::VertexBuffer(const void *data, unsigned int size) {
     GLCall(glGenBuffers(1, &m_RendererID));
