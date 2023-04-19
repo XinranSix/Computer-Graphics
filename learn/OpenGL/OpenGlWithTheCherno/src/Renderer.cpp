@@ -2,7 +2,6 @@
 // Created by yaojie on 2023/4/17.
 //
 
-
 #include "Renderer.h"
 #include <GL/glew.h>
 #include <fmt/core.h>

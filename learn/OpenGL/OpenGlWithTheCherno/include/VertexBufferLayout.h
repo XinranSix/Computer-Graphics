@@ -9,6 +9,9 @@
 #include "VertexBufferLayout.h"
 #include "Renderer.h"
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 struct VertexBufferElement {
     unsigned int type;
     unsigned int count;
