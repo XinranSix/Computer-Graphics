@@ -4,7 +4,7 @@
 
 #include <GL/glew.h>
 
-#include "TestClearColor.h"
+#include "tests/TestClearColor.h"
 #include "Renderer.h"
 #include "imgui.h"
 

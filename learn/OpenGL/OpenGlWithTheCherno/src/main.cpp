@@ -10,7 +10,7 @@
 #include "Texture.h"
 #include "imgui.h"
 #include "imgui_impl_glfw_gl3.h"
-#include "TestClearColor.h"
+#include "tests/TestClearColor.h"
 
 int main(int argc, char *argv[]) {
     GLFWwindow *window;
