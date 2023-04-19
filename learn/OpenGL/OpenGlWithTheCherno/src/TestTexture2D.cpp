@@ -47,8 +47,7 @@ namespace test {
         m_Texture = std::make_unique<Texture>("./assets/textures/ChernoLogo.png");
     }
 
-    TestTexture2D::~TestTexture2D() {
-    }
+    TestTexture2D::~TestTexture2D() {}
 
     void TestTexture2D::OnUpdate(float deltaTime) {}
 
