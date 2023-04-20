@@ -45,8 +45,8 @@ int main() {
 
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("./shader/3.6.shaders_exercise4/4.1.texture.vert",
-                     "./shader/3.6.shaders_exercise4/4.1.texture.frag"); // you can name your shader files however you like
+    Shader ourShader("./shader/3.6.shaders_exercise4/3.3.shader.vert",
+                     "./shader/3.6.shaders_exercise4/3.3.shader.frag");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -90,8 +90,8 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        ourShader.setFloat("xOffset", sin(-static_cast<float>(glfwGetTime())) / 2);
-        ourShader.setFloat("yOffset", cos(-static_cast<float>(glfwGetTime())) / 2);
+        ourShader.setFloat("xyOffset", sin(-static_cast<float>(glfwGetTime())) / 2,
+                           cos(-static_cast<float>(glfwGetTime())) / 2);
 
         // render the triangle
         ourShader.use();
