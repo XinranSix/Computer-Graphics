@@ -1,7 +1,0 @@
-add_subdirectory(1.getting_started)
-add_subdirectory(2.lighting)
-add_subdirectory(3.model_loading)
-add_subdirectory(4.advanced_opengl)
-add_subdirectory(5.advanced_lighting)
-add_subdirectory(6.pbr)
-add_subdirectory(7.in_practice)
