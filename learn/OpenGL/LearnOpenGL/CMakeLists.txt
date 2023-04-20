@@ -28,6 +28,9 @@ aux_source_directory(./src/8.textures_exercise1 SRC_LIST14)
 aux_source_directory(./src/8.textures_exercise2 SRC_LIST15)
 aux_source_directory(./src/8.textures_exercise3 SRC_LIST16)
 aux_source_directory(./src/8.textures_exercise4 SRC_LIST17)
+aux_source_directory(./src/9.transformations SRC_LIST18)
+aux_source_directory(./src/9.transformations_exercise SRC_LIST19)
+aux_source_directory(./src/10.CoordinateSystems SRC_LIST19)
 
 
 MESSAGE(${TEST_LIST})
@@ -53,6 +56,9 @@ set(
         8.textures_exercise3
         8.textures_exercise4
         4.shaders_uniform
+        9.transformations
+        9.transformations_exercise
+        10.CoordinateSystems
 )
 
 set(
@@ -75,6 +81,9 @@ set(
         ${SRC_LIST16}
         ${SRC_LIST17}
         ${SRC_LIST7}
+        ${SRC_LIST18}
+        ${SRC_LIST19}
+        ${SRC_LIST20}
 
 
 )
@@ -86,6 +95,8 @@ find_package(glad CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
 foreach (i RANGE ${len})
     list(GET EXECUTABLE_LIST ${i} val1)
@@ -99,6 +110,8 @@ foreach (i RANGE ${len})
     target_link_libraries(${val1} PRIVATE OpenGL::GL)
     target_link_libraries(${val1} PRIVATE glad::glad)
     target_link_libraries(${val1} PRIVATE imgui::imgui)
+    target_link_libraries(${val1} PRIVATE glm::glm)
+    target_link_libraries(${val1} PRIVATE fmt::fmt)
 
     add_custom_command(
             TARGET ${val1}
@@ -112,5 +125,6 @@ foreach (i RANGE ${len})
             COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/shader/"
             "$<TARGET_FILE_DIR:${val1}>/shader")
 endforeach ()
+
 
 
