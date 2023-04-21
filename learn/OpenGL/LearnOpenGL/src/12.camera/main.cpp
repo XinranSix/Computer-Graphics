@@ -176,7 +176,7 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     stbi_set_flip_vertically_on_load(true);
-    data = stbi_load("./assets/textures/awwawaww.jpg", &width, &height, &nrChannels, 0);
+    data = stbi_load("./assets/textures/O5BVT0UIJL`CGHJ9NLJ~_(E.jpg", &width, &height, &nrChannels, 0);
 
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
