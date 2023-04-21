@@ -83,7 +83,7 @@ public:
     // utility uniform functions
     // ------------------------------------------------------------------------
     void setBool(const std::string &name, bool value) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -92,7 +92,7 @@ public:
 
     // ------------------------------------------------------------------------
     void setInt(const std::string &name, int value) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -100,7 +100,7 @@ public:
     }
 
     void setInt(const std::string &name, int value1, int value2) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -108,7 +108,7 @@ public:
     }
 
     void setInt(const std::string &name, int value1, int value2, int value3) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -116,7 +116,7 @@ public:
     }
 
     void setInt(const std::string &name, int value1, int value2, int value3, int value4) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -125,15 +125,16 @@ public:
 
     // ------------------------------------------------------------------------
     void setFloat(const std::string &name, float value) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
+        // glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
         glUniform1f(locationCache[name], value);
     }
 
     void setFloat(const std::string &name, float value1, float value2) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -141,7 +142,7 @@ public:
     }
 
     void setFloat(const std::string &name, float value1, float value2, float value3) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }
@@ -149,7 +150,7 @@ public:
     }
 
     void setFloat(const std::string &name, float value1, float value2, float value3, float, float value4) const {
-        if (locationCache.find(name) != locationCache.end()) {
+        if (locationCache.find(name) == locationCache.end()) {
             auto location = glGetUniformLocation(ID, name.c_str());
             locationCache[name] = location;
         }

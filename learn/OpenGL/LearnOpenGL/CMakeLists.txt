@@ -30,7 +30,11 @@ aux_source_directory(./src/8.textures_exercise3 SRC_LIST16)
 aux_source_directory(./src/8.textures_exercise4 SRC_LIST17)
 aux_source_directory(./src/9.transformations SRC_LIST18)
 aux_source_directory(./src/9.transformations_exercise SRC_LIST19)
-aux_source_directory(./src/10.CoordinateSystems SRC_LIST19)
+aux_source_directory(./src/10.CoordinateSystems SRC_LIST20)
+aux_source_directory(./src/11.coordinate_systems-exercise1 SRC_LIST21)
+aux_source_directory(./src/11.coordinate_systems-exercise2 SRC_LIST22)
+aux_source_directory(./src/11.coordinate_systems-exercise3 SRC_LIST23)
+aux_source_directory(./src/12.camera SRC_LIST24)
 
 
 MESSAGE(${TEST_LIST})
@@ -59,6 +63,10 @@ set(
         9.transformations
         9.transformations_exercise
         10.CoordinateSystems
+        11.coordinate_systems-exercise1
+        11.coordinate_systems-exercise2
+        11.coordinate_systems-exercise3
+        12.camera
 )
 
 set(
@@ -84,6 +92,10 @@ set(
         ${SRC_LIST18}
         ${SRC_LIST19}
         ${SRC_LIST20}
+        ${SRC_LIST21}
+        ${SRC_LIST22}
+        ${SRC_LIST23}
+        ${SRC_LIST24}
 
 
 )
