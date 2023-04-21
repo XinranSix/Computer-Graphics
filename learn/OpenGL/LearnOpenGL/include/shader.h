@@ -13,10 +13,13 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <unordered_map>
+#include <string>
 
 class Shader {
 public:
     unsigned int ID;
+    mutable std::unordered_map<std::string, GLint> locationCache;
 
     // constructor generates the shader on the fly
     // ------------------------------------------------------------------------
@@ -80,45 +83,85 @@ public:
     // utility uniform functions
     // ------------------------------------------------------------------------
     void setBool(const std::string &name, bool value) const {
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), (int) value);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform1i(locationCache[name], (int) value);
     }
 
     // ------------------------------------------------------------------------
     void setInt(const std::string &name, int value) const {
-        glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform1i(locationCache[name], value);
     }
 
     void setInt(const std::string &name, int value1, int value2) const {
-        glUniform2i(glGetUniformLocation(ID, name.c_str()), value1, value2);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform2i(locationCache[name], value1, value2);
     }
 
     void setInt(const std::string &name, int value1, int value2, int value3) const {
-        glUniform3i(glGetUniformLocation(ID, name.c_str()), value1, value2, value3);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform3i(locationCache[name], value1, value2, value3);
     }
 
     void setInt(const std::string &name, int value1, int value2, int value3, int value4) const {
-        glUniform4i(glGetUniformLocation(ID, name.c_str()), value1, value2, value3, value4);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform4i(locationCache[name], value1, value2, value3, value4);
     }
 
     // ------------------------------------------------------------------------
     void setFloat(const std::string &name, float value) const {
-        glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform1f(locationCache[name], value);
     }
 
     void setFloat(const std::string &name, float value1, float value2) const {
-        glUniform2f(glGetUniformLocation(ID, name.c_str()), value1, value2);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform2f(locationCache[name], value1, value2);
     }
 
     void setFloat(const std::string &name, float value1, float value2, float value3) const {
-        glUniform3f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform3f(locationCache[name], value1, value2, value3);
     }
 
     void setFloat(const std::string &name, float value1, float value2, float value3, float, float value4) const {
-        glUniform4f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3, value4);
+        if (locationCache.find(name) != locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniform4f(locationCache[name], value1, value2, value3, value4);
     }
 
     void setMatrix4(const std::string &name, glm::mat4 value) const {
-        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr((value)));
+        if (locationCache.find(name) == locationCache.end()) {
+            auto location = glGetUniformLocation(ID, name.c_str());
+            locationCache[name] = location;
+        }
+        glUniformMatrix4fv(locationCache[name], 1, GL_FALSE, glm::value_ptr((value)));
     }
 
 private:
