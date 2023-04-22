@@ -35,6 +35,11 @@ aux_source_directory(./src/11.coordinate_systems-exercise1 SRC_LIST21)
 aux_source_directory(./src/11.coordinate_systems-exercise2 SRC_LIST22)
 aux_source_directory(./src/11.coordinate_systems-exercise3 SRC_LIST23)
 aux_source_directory(./src/12.camera SRC_LIST24)
+aux_source_directory(./src/13.Colors SRC_LIST25)
+aux_source_directory(./src/14.basicLighting SRC_LIST26)
+aux_source_directory(./src/15.basic_lighting_exercise1 SRC_LIST27)
+aux_source_directory(./src/15.basic_lighting_exercise2 SRC_LIST28)
+aux_source_directory(./src/15.basic_lighting_exercise3 SRC_LIST29)
 
 
 MESSAGE(${TEST_LIST})
@@ -67,6 +72,11 @@ set(
         11.coordinate_systems-exercise2
         11.coordinate_systems-exercise3
         12.camera
+        13.Colors
+        14.basicLighting
+        15.basic_lighting_exercise1
+        15.basic_lighting_exercise2
+        15.basic_lighting_exercise3
 )
 
 set(
@@ -96,8 +106,11 @@ set(
         ${SRC_LIST22}
         ${SRC_LIST23}
         ${SRC_LIST24}
-
-
+        ${SRC_LIST25}
+        ${SRC_LIST26}
+        ${SRC_LIST27}
+        ${SRC_LIST28}
+        ${SRC_LIST29}
 )
 
 list(LENGTH EXECUTABLE_LIST len)
