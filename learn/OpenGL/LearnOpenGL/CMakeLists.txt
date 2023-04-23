@@ -40,6 +40,7 @@ aux_source_directory(./src/14.basicLighting SRC_LIST26)
 aux_source_directory(./src/15.basic_lighting_exercise1 SRC_LIST27)
 aux_source_directory(./src/15.basic_lighting_exercise2 SRC_LIST28)
 aux_source_directory(./src/15.basic_lighting_exercise3 SRC_LIST29)
+aux_source_directory(./src/16.materials SRC_LIST30)
 
 
 MESSAGE(${TEST_LIST})
@@ -77,6 +78,7 @@ set(
         15.basic_lighting_exercise1
         15.basic_lighting_exercise2
         15.basic_lighting_exercise3
+        16.materials
 )
 
 set(
@@ -111,6 +113,7 @@ set(
         ${SRC_LIST27}
         ${SRC_LIST28}
         ${SRC_LIST29}
+        ${SRC_LIST30}
 )
 
 list(LENGTH EXECUTABLE_LIST len)
