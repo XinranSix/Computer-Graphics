@@ -41,6 +41,15 @@ aux_source_directory(./src/15.basic_lighting_exercise1 SRC_LIST27)
 aux_source_directory(./src/15.basic_lighting_exercise2 SRC_LIST28)
 aux_source_directory(./src/15.basic_lighting_exercise3 SRC_LIST29)
 aux_source_directory(./src/16.materials SRC_LIST30)
+aux_source_directory(./src/17.lighting_maps SRC_LIST31)
+aux_source_directory(./src/17.lighting_maps-exercise1 SRC_LIST32)
+aux_source_directory(./src/17.lighting_maps-exercise2 SRC_LIST33)
+aux_source_directory(./src/17.lighting_maps-exercise3 SRC_LIST34)
+aux_source_directory(./src/17.lighting_maps-exercise4 SRC_LIST35)
+aux_source_directory(./src/18.light_caster SRC_LIST36)
+aux_source_directory(./src/19.multiple_lights SRC_LIST37)
+aux_source_directory(./src/19.multiple_lights_exericse1 SRC_LIST38)
+aux_source_directory(./src/20.loading_mesh SRC_LIST39)
 
 
 MESSAGE(${TEST_LIST})
@@ -79,6 +88,15 @@ set(
         15.basic_lighting_exercise2
         15.basic_lighting_exercise3
         16.materials
+        17.lighting_maps
+        17.lighting_maps-exercise1
+        17.lighting_maps-exercise2
+        17.lighting_maps-exercise3
+        17.lighting_maps-exercise4
+        18.light_caster
+        19.multiple_lights
+        19.multiple_lights_exericse1
+        20.loading_mesh
 )
 
 set(
@@ -114,6 +132,15 @@ set(
         ${SRC_LIST28}
         ${SRC_LIST29}
         ${SRC_LIST30}
+        ${SRC_LIST31}
+        ${SRC_LIST32}
+        ${SRC_LIST33}
+        ${SRC_LIST34}
+        ${SRC_LIST35}
+        ${SRC_LIST36}
+        ${SRC_LIST37}
+        ${SRC_LIST38}
+        ${SRC_LIST39}
 )
 
 list(LENGTH EXECUTABLE_LIST len)
@@ -125,6 +152,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
+find_package(assimp CONFIG REQUIRED)
 
 foreach (i RANGE ${len})
     list(GET EXECUTABLE_LIST ${i} val1)
@@ -140,6 +168,7 @@ foreach (i RANGE ${len})
     target_link_libraries(${val1} PRIVATE imgui::imgui)
     target_link_libraries(${val1} PRIVATE glm::glm)
     target_link_libraries(${val1} PRIVATE fmt::fmt)
+    target_link_libraries(${val1} PRIVATE assimp::assimp)
 
     add_custom_command(
             TARGET ${val1}
@@ -153,6 +182,3 @@ foreach (i RANGE ${len})
             COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/shader/"
             "$<TARGET_FILE_DIR:${val1}>/shader")
 endforeach ()
-
-
-
