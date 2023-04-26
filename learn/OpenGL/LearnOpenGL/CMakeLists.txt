@@ -50,6 +50,16 @@ aux_source_directory(./src/18.light_caster SRC_LIST36)
 aux_source_directory(./src/19.multiple_lights SRC_LIST37)
 aux_source_directory(./src/19.multiple_lights_exericse1 SRC_LIST38)
 aux_source_directory(./src/20.loading_mesh SRC_LIST39)
+aux_source_directory(./src/21.depth_testing SRC_LIST40)
+aux_source_directory(./src/22.stencil_testing SRC_LIST41)
+aux_source_directory(./src/23.blending SRC_LIST42)
+aux_source_directory(./src/24.blending_sort SRC_LIST43)
+aux_source_directory(./src/25.framebuffers SRC_LIST44)
+aux_source_directory(./src/25.framebuffers_exercise1 SRC_LIST45)
+aux_source_directory(./src/26.cubemaps_environment_mapping SRC_LIST46)
+aux_source_directory(./src/26.cubemaps_skybox SRC_LIST47)
+aux_source_directory(./src/27.advanced_glsl_ubo SRC_LIST48)
+
 
 
 MESSAGE(${TEST_LIST})
@@ -97,6 +107,15 @@ set(
         19.multiple_lights
         19.multiple_lights_exericse1
         20.loading_mesh
+        21.depth_testing
+        22.stencil_testing
+        23.blending
+        24.blending_sort
+        25.framebuffers
+        25.framebuffers_exercise1
+        26.cubemaps_environment_mapping
+        26.cubemaps_skybox
+        27.advanced_glsl_ubo
 )
 
 set(
@@ -141,6 +160,16 @@ set(
         ${SRC_LIST37}
         ${SRC_LIST38}
         ${SRC_LIST39}
+        ${SRC_LIST40}
+        ${SRC_LIST41}
+        ${SRC_LIST42}
+        ${SRC_LIST43}
+        ${SRC_LIST44}
+        ${SRC_LIST45}
+        ${SRC_LIST46}
+        ${SRC_LIST47}
+        ${SRC_LIST48}
+
 )
 
 list(LENGTH EXECUTABLE_LIST len)

@@ -1,7 +1,0 @@
-#include <iostream>
-#include <cstdio>
-
-int main() {
-    std::printf("Hello World\n");
-    return 0;
-}
