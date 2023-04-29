@@ -1,0 +1,159 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(axibai)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
+
+include_directories(./include)
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+
+add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+aux_source_directory(./src/sample_1_1HelloWindow SRC_LIST1)
+aux_source_directory(./src/sample_1_2HelloTriangle SRC_LIST2)
+aux_source_directory(./src/sample_1_2HelloTriangle2 SRC_LIST3)
+aux_source_directory(./src/sample_1_2HelloTriangle3 SRC_LIST4)
+aux_source_directory(./src/sample_1_2HelloTriangle_exercise1 SRC_LIST5)
+aux_source_directory(./src/sample_1_2HelloTriangle_exercise2 SRC_LIST6)
+aux_source_directory(./src/sample_1_2HelloTriangle_exercise3 SRC_LIST7)
+aux_source_directory(./src/sample_1_3Shaders SRC_LIST8)
+aux_source_directory(./src/sample_1_3Shaders2 SRC_LIST9)
+aux_source_directory(./src/sample_1_3Shaders3 SRC_LIST10)
+aux_source_directory(./src/sample_1_3Shaders3_exercise1 SRC_LIST11)
+aux_source_directory(./src/sample_1_3Shaders3_exercise2 SRC_LIST12)
+aux_source_directory(./src/sample_1_3Shaders3_exercise3 SRC_LIST13)
+aux_source_directory(./src/sample_1_3Shaders3_exercise4 SRC_LIST14)
+aux_source_directory(./src/sample_1_3Shaders4 SRC_LIST15)
+aux_source_directory(./src/sample_1_4Texture SRC_LIST16)
+aux_source_directory(./src/sample_1_4Texture2 SRC_LIST17)
+aux_source_directory(./src/sample_1_4Texture3 SRC_LIST18)
+aux_source_directory(./src/sample_1_4Texture4 SRC_LIST19)
+aux_source_directory(./src/sample_1_4Texture_exercise1 SRC_LIST20)
+aux_source_directory(./src/sample_1_4Texture_exercise2 SRC_LIST21)
+aux_source_directory(./src/sample_1_4Texture_exercise3 SRC_LIST22)
+aux_source_directory(./src/sample_1_4Texture_exercise4 SRC_LIST23)
+aux_source_directory(./src/sample_1_5Transformations SRC_LIST24)
+aux_source_directory(./src/sample_1_5Transformations_exercise1 SRC_LIST25)
+aux_source_directory(./src/sample_1_5Transformations_exercise2 SRC_LIST26)
+aux_source_directory(./src/sample_1_6CoordinateSystem SRC_LIST27)
+aux_source_directory(./src/sample_1_6CoordinateSystem2 SRC_LIST28)
+
+set(
+        EXECUTABLE_LIST
+        sample_1_1HelloWindow
+        sample_1_2HelloTriangle
+        sample_1_2HelloTriangle2
+        sample_1_2HelloTriangle3
+        sample_1_2HelloTriangle_exercise1
+        sample_1_2HelloTriangle_exercise2
+        sample_1_2HelloTriangle_exercise3
+        sample_1_3Shaders
+        sample_1_3Shaders2
+        sample_1_3Shaders3
+        sample_1_3Shaders3_exercise1
+        sample_1_3Shaders3_exercise2
+        sample_1_3Shaders3_exercise3
+        sample_1_3Shaders3_exercise4
+        sample_1_3Shaders4
+        sample_1_4Texture
+        sample_1_4Texture2
+        sample_1_4Texture3
+        sample_1_4Texture4
+        sample_1_4Texture_exercise1
+        sample_1_4Texture_exercise2
+        sample_1_4Texture_exercise3
+        sample_1_4Texture_exercise4
+        sample_1_5Transformations
+        sample_1_5Transformations_exercise1
+        sample_1_5Transformations_exercise2
+        sample_1_6CoordinateSystem
+        sample_1_6CoordinateSystem2
+)
+
+set(
+        SOURCE_LIST
+        ${SRC_LIST1}
+        ${SRC_LIST2}
+        ${SRC_LIST3}
+        ${SRC_LIST4}
+        ${SRC_LIST5}
+        ${SRC_LIST6}
+        ${SRC_LIST7}
+        ${SRC_LIST8}
+        ${SRC_LIST9}
+        ${SRC_LIST10}
+        ${SRC_LIST11}
+        ${SRC_LIST12}
+        ${SRC_LIST13}
+        ${SRC_LIST14}
+        ${SRC_LIST15}
+        ${SRC_LIST16}
+        ${SRC_LIST17}
+        ${SRC_LIST18}
+        ${SRC_LIST19}
+        ${SRC_LIST20}
+        ${SRC_LIST21}
+        ${SRC_LIST22}
+        ${SRC_LIST23}
+        ${SRC_LIST24}
+        ${SRC_LIST25}
+        ${SRC_LIST26}
+        ${SRC_LIST27}
+        ${SRC_LIST28}
+)
+
+set(
+        OTHER_LIST
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image.cpp
+)
+
+list(LENGTH EXECUTABLE_LIST len)
+math(EXPR len "${len} - 1")
+
+find_package(glad CONFIG REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(assimp CONFIG REQUIRED)
+
+foreach (i RANGE ${len})
+    list(GET EXECUTABLE_LIST ${i} val1)
+    list(GET SOURCE_LIST ${i} val2)
+
+#    set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${val1})
+
+    add_executable(${val1} ${val2} ${OTHER_LIST})
+
+    target_link_libraries(${val1} PRIVATE glfw)
+    target_link_libraries(${val1} PRIVATE OpenGL::GL)
+    target_link_libraries(${val1} PRIVATE glad::glad)
+    target_link_libraries(${val1} PRIVATE imgui::imgui)
+    target_link_libraries(${val1} PRIVATE glm::glm)
+    target_link_libraries(${val1} PRIVATE fmt::fmt)
+    target_link_libraries(${val1} PRIVATE assimp::assimp)
+
+#    add_custom_command(
+#            TARGET ${val1}
+#            POST_BUILD
+#            COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/src/${val1}/pics/"
+#            "$<TARGET_FILE_DIR:${val1}>/pics")
+
+    add_custom_command(
+            TARGET ${val1}
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/assets"
+            "$<TARGET_FILE_DIR:${val1}>/assets")
+
+    add_custom_command(
+            TARGET ${val1}
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/src/${val1}/shaders/"
+            "$<TARGET_FILE_DIR:${val1}>/shaders")
+
+endforeach ()
