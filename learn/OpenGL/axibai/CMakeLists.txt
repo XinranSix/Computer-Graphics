@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
 include_directories(./include)
-
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
@@ -41,6 +40,13 @@ aux_source_directory(./src/sample_1_5Transformations_exercise1 SRC_LIST25)
 aux_source_directory(./src/sample_1_5Transformations_exercise2 SRC_LIST26)
 aux_source_directory(./src/sample_1_6CoordinateSystem SRC_LIST27)
 aux_source_directory(./src/sample_1_6CoordinateSystem2 SRC_LIST28)
+aux_source_directory(./src/sample_1_6CoordinateSystem_exercise1 SRC_LIST29)
+aux_source_directory(./src/sample_1_6CoordinateSystem_exercise2 SRC_LIST30)
+aux_source_directory(./src/sample_1_6CoordinateSystem_exercise3 SRC_LIST31)
+aux_source_directory(./src/sample_1_7Camera SRC_LIST32)
+aux_source_directory(./src/sample_1_7Camera_2 SRC_LIST33)
+aux_source_directory(./src/sample_1_7Camera_exercise1 SRC_LIST34)
+aux_source_directory(./src/sample_1_7Camera_exercise2 SRC_LIST35)
 
 set(
         EXECUTABLE_LIST
@@ -72,6 +78,13 @@ set(
         sample_1_5Transformations_exercise2
         sample_1_6CoordinateSystem
         sample_1_6CoordinateSystem2
+        sample_1_6CoordinateSystem_exercise1
+        sample_1_6CoordinateSystem_exercise2
+        sample_1_6CoordinateSystem_exercise3
+        sample_1_7Camera
+        sample_1_7Camera_2
+        sample_1_7Camera_exercise1
+        sample_1_7Camera_exercise2
 )
 
 set(
@@ -104,12 +117,16 @@ set(
         ${SRC_LIST26}
         ${SRC_LIST27}
         ${SRC_LIST28}
+        ${SRC_LIST29}
+        ${SRC_LIST30}
+        ${SRC_LIST31}
+        ${SRC_LIST32}
+        ${SRC_LIST33}
+        ${SRC_LIST34}
+        ${SRC_LIST35}
 )
 
-set(
-        OTHER_LIST
-        ${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image.cpp
-)
+aux_source_directory(./lib/ OTHER_LIST)
 
 list(LENGTH EXECUTABLE_LIST len)
 math(EXPR len "${len} - 1")
@@ -126,8 +143,6 @@ foreach (i RANGE ${len})
     list(GET EXECUTABLE_LIST ${i} val1)
     list(GET SOURCE_LIST ${i} val2)
 
-#    set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${val1})
-
     add_executable(${val1} ${val2} ${OTHER_LIST})
 
     target_link_libraries(${val1} PRIVATE glfw)
@@ -137,12 +152,6 @@ foreach (i RANGE ${len})
     target_link_libraries(${val1} PRIVATE glm::glm)
     target_link_libraries(${val1} PRIVATE fmt::fmt)
     target_link_libraries(${val1} PRIVATE assimp::assimp)
-
-#    add_custom_command(
-#            TARGET ${val1}
-#            POST_BUILD
-#            COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/src/${val1}/pics/"
-#            "$<TARGET_FILE_DIR:${val1}>/pics")
 
     add_custom_command(
             TARGET ${val1}

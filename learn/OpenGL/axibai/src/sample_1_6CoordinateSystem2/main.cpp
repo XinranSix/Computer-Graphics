@@ -198,8 +198,6 @@ int main() {
             ourShader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-
-
         // glfw: 交换缓冲区和轮询IO事件（按键按下/释放、鼠标移动等）
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
