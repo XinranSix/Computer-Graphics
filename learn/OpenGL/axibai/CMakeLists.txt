@@ -47,6 +47,12 @@ aux_source_directory(./src/sample_1_7Camera SRC_LIST32)
 aux_source_directory(./src/sample_1_7Camera_2 SRC_LIST33)
 aux_source_directory(./src/sample_1_7Camera_exercise1 SRC_LIST34)
 aux_source_directory(./src/sample_1_7Camera_exercise2 SRC_LIST35)
+aux_source_directory(./src/sample_2_1Color SRC_LIST36)
+aux_source_directory(./src/sample_2_2Phong SRC_LIST37)
+aux_source_directory(./src/sample_2_2Phong_exercise1 SRC_LIST38)
+aux_source_directory(./src/sample_2_2Phong_exercise2 SRC_LIST39)
+aux_source_directory(./src/sample_2_2Phong_exercise3 SRC_LIST40)
+aux_source_directory(./src/sample_2_2Phong_exercise4 SRC_LIST41)
 
 set(
         EXECUTABLE_LIST
@@ -85,6 +91,12 @@ set(
         sample_1_7Camera_2
         sample_1_7Camera_exercise1
         sample_1_7Camera_exercise2
+        sample_2_1Color
+        sample_2_2Phong
+        sample_2_2Phong_exercise1
+        sample_2_2Phong_exercise2
+        sample_2_2Phong_exercise3
+        sample_2_2Phong_exercise4
 )
 
 set(
@@ -124,6 +136,12 @@ set(
         ${SRC_LIST33}
         ${SRC_LIST34}
         ${SRC_LIST35}
+        ${SRC_LIST36}
+        ${SRC_LIST37}
+        ${SRC_LIST38}
+        ${SRC_LIST39}
+        ${SRC_LIST40}
+        ${SRC_LIST41}
 )
 
 aux_source_directory(./lib/ OTHER_LIST)
