@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "model.h"
+#include <array>
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
@@ -61,6 +62,7 @@ int main() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // tell GLFW to capture our mouse
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -81,7 +83,6 @@ int main() {
     Shader ourShader("shaders/shader.vs", "shaders/shader.fs");
     Shader lightShader("shaders/shader.vs", "shaders/lightShader.fs");
 
-
     // positions all containers
     glm::vec3 cubePositions[] = {
             glm::vec3(0.0f, 0.0f, 0.0f),
@@ -96,7 +97,7 @@ int main() {
             glm::vec3(-1.3f, 1.0f, -1.5f)
     };
     // positions of the point lights
-    glm::vec3 pointLightPositions[] = {
+    std::array<glm::vec3, 4> pointLightPositions = {
             glm::vec3(0.7f, 0.2f, 2.0f),
             glm::vec3(2.3f, -3.3f, -4.0f),
             glm::vec3(-4.0f, 2.0f, -12.0f),
@@ -212,14 +213,13 @@ int main() {
         lightShader.setMat4("view", view);
 
         // we now draw as many light bulbs as we have point lights.
-        for (unsigned int i = 0; i < 0; i++) {
+        for (unsigned int i = 0; i < pointLightPositions.size(); i++) {
             model = glm::mat4(1.0f);
             model = glm::translate(model, pointLightPositions[i]);
             model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
             lightShader.setMat4("model", model);
             modelCube.Draw(lightShader);
         }
-
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
