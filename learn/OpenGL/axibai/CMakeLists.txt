@@ -70,6 +70,8 @@ aux_source_directory(./src/sample_2_6MultipleLights_exercise3 SRC_LIST55)
 aux_source_directory(./src/sample_2_6MultipleLights_exercise4 SRC_LIST56)
 aux_source_directory(./src/sample_3_1MeshClass SRC_LIST57)
 aux_source_directory(./src/sample_3_2ModelClass SRC_LIST58)
+aux_source_directory(./src/sample_4_1DepthTest SRC_LIST59)
+aux_source_directory(./src/sample_4_2MousePicking SRC_LIST60)
 
 
 set(
@@ -132,6 +134,8 @@ set(
         sample_2_6MultipleLights_exercise4
         sample_3_1MeshClass
         sample_3_2ModelClass
+        sample_4_1DepthTest
+        sample_4_2MousePicking
 )
 
 set(
@@ -194,6 +198,8 @@ set(
         ${SRC_LIST56}
         ${SRC_LIST57}
         ${SRC_LIST58}
+        ${SRC_LIST59}
+        ${SRC_LIST60}
 )
 
 aux_source_directory(./lib/ OTHER_LIST)
