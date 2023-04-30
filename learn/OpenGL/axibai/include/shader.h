@@ -15,37 +15,37 @@ class Shader
 public:
     unsigned int ID;
    mutable std::unordered_map<std::string, GLuint> uniformLocationCache;
-    // ¹¹Ôìº¯Êı¶¯Ì¬Éú³É×ÅÉ«Æ÷
+    // æ„é€ å‡½æ•°åŠ¨æ€ç”Ÿæˆç€è‰²å™¨
     // ------------------------------------------------------------------------
     Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr)
     {
-        // 1.´ÓÎÄ¼şÂ·¾¶ÖĞ»ñÈ¡¶¥µã/Æ¬¶ÎÔ´´úÂë
+        // 1.ä»æ–‡ä»¶è·¯å¾„ä¸­è·å–é¡¶ç‚¹/ç‰‡æ®µæºä»£ç 
         std::string vertexCode;
         std::string fragmentCode;
         std::string geometryCode;
         std::ifstream vShaderFile;
         std::ifstream fShaderFile;
         std::ifstream gShaderFile;
-        // È·±£ifstream¶ÔÏó¿ÉÒÔÒı·¢Òì³££º
+        // ç¡®ä¿ifstreamå¯¹è±¡å¯ä»¥å¼•å‘å¼‚å¸¸ï¼š
         vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-            // ´ò¿ªÎÄ¼ş
+            // æ‰“å¼€æ–‡ä»¶
             vShaderFile.open(vertexPath);
             fShaderFile.open(fragmentPath);
             std::stringstream vShaderStream, fShaderStream;
-            // ½«ÎÄ¼şµÄ»º³åÇøÄÚÈİ¶ÁÈëÁ÷
+            // å°†æ–‡ä»¶çš„ç¼“å†²åŒºå†…å®¹è¯»å…¥æµ
             vShaderStream << vShaderFile.rdbuf();
             fShaderStream << fShaderFile.rdbuf();
-            // ¹Ø±ÕÎÄ¼ş
+            // å…³é—­æ–‡ä»¶
             vShaderFile.close();
             fShaderFile.close();
-            // ½«Á÷×ª»»Îª×Ö·û´®
+            // å°†æµè½¬æ¢ä¸ºå­—ç¬¦ä¸²
             vertexCode = vShaderStream.str();
             fragmentCode = fShaderStream.str();
-            // Èç¹û´æÔÚ¼¸ºÎÌå×ÅÉ«Æ÷Â·¾¶£¬ÇëÍ¬Ê±¼ÓÔØ¼¸ºÎÌå×ÅÉ«Æ÷
+            // å¦‚æœå­˜åœ¨å‡ ä½•ä½“ç€è‰²å™¨è·¯å¾„ï¼Œè¯·åŒæ—¶åŠ è½½å‡ ä½•ä½“ç€è‰²å™¨
             if (geometryPath != nullptr)
             {
                 gShaderFile.open(geometryPath);
@@ -61,19 +61,19 @@ public:
         }
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
-        // 2. ±àÒë×ÅÉ«Æ÷
+        // 2. ç¼–è¯‘ç€è‰²å™¨
         unsigned int vertex, fragment;
-        // ¶¥µã×ÅÉ«Æ÷
+        // é¡¶ç‚¹ç€è‰²å™¨
         vertex = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex, 1, &vShaderCode, NULL);
         glCompileShader(vertex);
         checkCompileErrors(vertex, "VERTEX");
-        // Æ¬¶Î×ÅÉ«Æ÷
+        // ç‰‡æ®µç€è‰²å™¨
         fragment = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragment, 1, &fShaderCode, NULL);
         glCompileShader(fragment);
         checkCompileErrors(fragment, "FRAGMENT");
-        // Èç¹û¸ø¶¨ÁË¼¸ºÎÌå×ÅÉ«Æ÷£¬Çë±àÒë¼¸ºÎÌå×ÅÉ«Æ÷
+        // å¦‚æœç»™å®šäº†å‡ ä½•ä½“ç€è‰²å™¨ï¼Œè¯·ç¼–è¯‘å‡ ä½•ä½“ç€è‰²å™¨
         unsigned int geometry;
         if (geometryPath != nullptr)
         {
@@ -83,7 +83,7 @@ public:
             glCompileShader(geometry);
             checkCompileErrors(geometry, "GEOMETRY");
         }
-        // ×ÅÉ«Æ÷³ÌĞò
+        // ç€è‰²å™¨ç¨‹åº
         ID = glCreateProgram();
         glAttachShader(ID, vertex);
         glAttachShader(ID, fragment);
@@ -91,20 +91,20 @@ public:
             glAttachShader(ID, geometry);
         glLinkProgram(ID);
         checkCompileErrors(ID, "PROGRAM");
-        // É¾³ı×ÅÉ«Æ÷£¬ÒòÎªËüÃÇÏÖÔÚÁ´½Óµ½×ÅÉ«Æ÷³ÌĞòÖĞ£¬²»ÔÙĞèÒªÁË
+        // åˆ é™¤ç€è‰²å™¨ï¼Œå› ä¸ºå®ƒä»¬ç°åœ¨é“¾æ¥åˆ°ç€è‰²å™¨ç¨‹åºä¸­ï¼Œä¸å†éœ€è¦äº†
         glDeleteShader(vertex);
         glDeleteShader(fragment);
         if (geometryPath != nullptr)
             glDeleteShader(geometry);
 
     }
-    // Ñ¡Ôñ×ÅÉ«Æ÷³ÌĞò
+    // é€‰æ‹©ç€è‰²å™¨ç¨‹åº
     // ------------------------------------------------------------------------
     void use()
     {
         glUseProgram(ID);
     }
-    // uniformµÄÊµÓÃº¯Êı
+    // uniformçš„å®ç”¨å‡½æ•°
     // ------------------------------------------------------------------------
     void setBool(const std::string& name, bool value) const
     {
@@ -164,7 +164,7 @@ public:
     }
 
 private:
-    // ÓÃÓÚ¼ì²é×ÅÉ«Æ÷±àÒë/Á´½Ó´íÎóµÄÊµÓÃº¯Êı¡£
+    // ç”¨äºæ£€æŸ¥ç€è‰²å™¨ç¼–è¯‘/é“¾æ¥é”™è¯¯çš„å®ç”¨å‡½æ•°ã€‚
     // ------------------------------------------------------------------------
     void checkCompileErrors(GLuint shader, std::string type)
     {

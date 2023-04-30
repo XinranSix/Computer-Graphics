@@ -53,6 +53,22 @@ aux_source_directory(./src/sample_2_2Phong_exercise1 SRC_LIST38)
 aux_source_directory(./src/sample_2_2Phong_exercise2 SRC_LIST39)
 aux_source_directory(./src/sample_2_2Phong_exercise3 SRC_LIST40)
 aux_source_directory(./src/sample_2_2Phong_exercise4 SRC_LIST41)
+aux_source_directory(./src/sample_2_3Material SRC_LIST42)
+aux_source_directory(./src/sample_2_3Material_exericse1 SRC_LIST43)
+aux_source_directory(./src/sample_2_3Material_exericse2 SRC_LIST44)
+aux_source_directory(./src/sample_2_4LightingMap SRC_LIST45)
+aux_source_directory(./src/sample_2_4LightingMap_exercise1 SRC_LIST46)
+aux_source_directory(./src/sample_2_4LightingMap_exercise2 SRC_LIST47)
+aux_source_directory(./src/sample_2_4LightingMap_exercise3 SRC_LIST48)
+aux_source_directory(./src/sample_2_5LightCaster SRC_LIST49)
+aux_source_directory(./src/sample_2_5LightCaster_2 SRC_LIST50)
+aux_source_directory(./src/sample_2_5LightCaster_3 SRC_LIST51)
+aux_source_directory(./src/sample_2_6MultipleLights SRC_LIST52)
+aux_source_directory(./src/sample_2_6MultipleLights_exercise1 SRC_LIST53)
+aux_source_directory(./src/sample_2_6MultipleLights_exercise2 SRC_LIST54)
+aux_source_directory(./src/sample_2_6MultipleLights_exercise3 SRC_LIST55)
+aux_source_directory(./src/sample_2_6MultipleLights_exercise4 SRC_LIST56)
+
 
 set(
         EXECUTABLE_LIST
@@ -97,6 +113,21 @@ set(
         sample_2_2Phong_exercise2
         sample_2_2Phong_exercise3
         sample_2_2Phong_exercise4
+        sample_2_3Material
+        sample_2_3Material_exericse1
+        sample_2_3Material_exericse2
+        sample_2_4LightingMap
+        sample_2_4LightingMap_exercise1
+        sample_2_4LightingMap_exercise2
+        sample_2_4LightingMap_exercise3
+        sample_2_5LightCaster
+        sample_2_5LightCaster_2
+        sample_2_5LightCaster_3
+        sample_2_6MultipleLights
+        sample_2_6MultipleLights_exercise1
+        sample_2_6MultipleLights_exercise2
+        sample_2_6MultipleLights_exercise3
+        sample_2_6MultipleLights_exercise4
 )
 
 set(
@@ -142,6 +173,22 @@ set(
         ${SRC_LIST39}
         ${SRC_LIST40}
         ${SRC_LIST41}
+        ${SRC_LIST42}
+        ${SRC_LIST43}
+        ${SRC_LIST44}
+        ${SRC_LIST45}
+        ${SRC_LIST46}
+        ${SRC_LIST47}
+        ${SRC_LIST48}
+        ${SRC_LIST49}
+        ${SRC_LIST50}
+        ${SRC_LIST51}
+        ${SRC_LIST52}
+        ${SRC_LIST53}
+        ${SRC_LIST54}
+        ${SRC_LIST55}
+        ${SRC_LIST56}
+
 )
 
 aux_source_directory(./lib/ OTHER_LIST)
