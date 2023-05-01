@@ -10,6 +10,4 @@ include_directories(./include)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-
-add_executable(thread ./src/thread.cpp)
-add_executable(test ./test/test.cpp ./test/foo.c)
+add_subdirectory(src)
