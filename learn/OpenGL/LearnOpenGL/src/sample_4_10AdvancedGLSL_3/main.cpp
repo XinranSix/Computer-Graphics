@@ -241,6 +241,19 @@ int main() {
             };
     unsigned int cubemapTexture = loadCubemap(faces);
 
+    unsigned int uniformshader = glGetUniformBlockIndex(shader.ID, "Matrices");
+    unsigned int uniformskyboxShader = glGetUniformBlockIndex(skyboxShader.ID, "Matrices");
+
+    glUniformBlockBinding(shader.ID, uniformshader, 1);
+    glUniformBlockBinding(skyboxShader.ID, uniformskyboxShader, 1);
+
+    unsigned int uboMatrices;
+    glGenBuffers(1, &uboMatrices);
+    glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+    glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    glBindBufferRange(GL_UNIFORM_BUFFER, 1, uboMatrices, 0, 2 * sizeof(glm::mat4));
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window)) {
@@ -263,8 +276,14 @@ int main() {
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f,
                                                 100.0f);
-        shader.setMat4("view", view);
-        shader.setMat4("projection", projection);
+
+        glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection));
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+        //shader.setMat4("view", view);
+        //shader.setMat4("projection", projection);
         // cubes
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
@@ -284,11 +303,11 @@ int main() {
         glBindVertexArray(0);
 
         // draw skybox as last 
-        glDepthFunc(GL_EQUAL); // 等于的时候也pass
+        glDepthFunc(GL_LEQUAL); // 等于的时候也pass
         skyboxShader.use();
-        view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 消除第四列，即位移向量的影响
-        skyboxShader.setMat4("view", view);
-        skyboxShader.setMat4("projection", projection);
+        //view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 消除第四列，即位移向量的影响
+        //skyboxShader.setMat4("view", view);
+        //skyboxShader.setMat4("projection", projection);
         // skybox cube 
         glBindVertexArray(skyboxVAO);
         glActiveTexture(GL_TEXTURE0);

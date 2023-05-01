@@ -185,7 +185,6 @@ int main() {
             1.0f, -1.0f, 1.0f
     };
 
-
     // cube VAO
     unsigned int cubeVAO, cubeVBO;
     glGenVertexArrays(1, &cubeVAO);
@@ -284,7 +283,7 @@ int main() {
         glBindVertexArray(0);
 
         // draw skybox as last 
-        glDepthFunc(GL_EQUAL); // 等于的时候也pass
+        glDepthFunc(GL_LEQUAL); // 等于的时候也pass
         skyboxShader.use();
         view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 消除第四列，即位移向量的影响
         skyboxShader.setMat4("view", view);

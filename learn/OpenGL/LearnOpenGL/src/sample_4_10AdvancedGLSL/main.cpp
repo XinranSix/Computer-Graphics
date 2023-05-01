@@ -78,6 +78,7 @@ int main() {
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_PROGRAM_POINT_SIZE);
 
     // build and compile shaders
     // -------------------------
@@ -271,11 +272,11 @@ int main() {
         glBindTexture(GL_TEXTURE_2D, cubeTexture);
         model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
         shader.setMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_POINTS, 0, 36);
         model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
         shader.setMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_POINTS, 0, 36);
         // floor
         glBindVertexArray(planeVAO);
         glBindTexture(GL_TEXTURE_2D, floorTexture);
@@ -284,7 +285,7 @@ int main() {
         glBindVertexArray(0);
 
         // draw skybox as last 
-        glDepthFunc(GL_EQUAL); // 等于的时候也pass
+        glDepthFunc(GL_LEQUAL); // 等于的时候也pass
         skyboxShader.use();
         view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 消除第四列，即位移向量的影响
         skyboxShader.setMat4("view", view);
