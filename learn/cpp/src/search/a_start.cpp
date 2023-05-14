@@ -1,26 +1,26 @@
-#include <iomanip>
-#include <stdlib.h>
-#include <iostream>
-#include <time.h>
-#include <stdio.h>
 #include <conio.h>
+#include <iomanip>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
-//定义默认目标状态
+// 定义默认目标状态
 static int target[9] = {1, 2, 3, 8, 0, 4, 7, 6, 5};
 
-//八数码类
+// 八数码类
 class EightNum {
 private:
     int num[9];
-    int diffnum; //与目标状态位置不同的数的个数.
-    int deapth;  //派生的深度.
-    int evalfun; //状态的估价值
+    int diffnum; // 与目标状态位置不同的数的个数.
+    int deapth;  // 派生的深度.
+    int evalfun; // 状态的估价值
 public:
-    EightNum *parent;     //生成当前状态的父状态.
-    EightNum *state_pre;  //当前状态前生成状态.
-    EightNum *state_next; //当前状态后生成状态.
-    //成员函数声明
+    EightNum *parent;     // 生成当前状态的父状态.
+    EightNum *state_pre;  // 当前状态前生成状态.
+    EightNum *state_next; // 当前状态后生成状态.
+    // 成员函数声明
     EightNum(void);
 
     EightNum(int initnum[9]);
@@ -46,24 +46,24 @@ public:
     int operator==(EightNum &NewEightN);
 
     int operator==(int num2[9]);
-}; //八数码类定义
+}; // 八数码类定义
 
-//八数码类成员函数定义
-EightNum::EightNum(void) { //初始化数组num[]
+// 八数码类成员函数定义
+EightNum::EightNum(void) { // 初始化数组num[]
     for (int i = 0; i < 9; i++)
         num[i] = i;
 }
 
-EightNum::EightNum(int initnum[9]) { //用输入的数组初始化num[]
+EightNum::EightNum(int initnum[9]) { // 用输入的数组初始化num[]
     for (int i = 0; i < 9; i++)
         num[i] = initnum[i];
 }
 
-int EightNum::get_evalfun() { //返回估价值
+int EightNum::get_evalfun() { // 返回估价值
     return evalfun;
 }
 
-void EightNum::eval_func() { //估价函数
+void EightNum::eval_func() { // 估价函数
     int i, temp;
     temp = 0;
     for (i = 0; i < 9; i++) {
@@ -78,17 +78,17 @@ void EightNum::eval_func() { //估价函数
     evalfun = deapth + temp;
 }
 
-void EightNum::getnum(int num1[9]) { //取出八数码数值
+void EightNum::getnum(int num1[9]) { // 取出八数码数值
     for (int i = 0; i < 9; i++)
         num1[i] = num[i];
 }
 
-void EightNum::setnum(int num1[9]) { //写入八数码数值
+void EightNum::setnum(int num1[9]) { // 写入八数码数值
     for (int i = 0; i < 9; i++)
         num[i] = num1[i];
 }
 
-void EightNum::show() { //八数码输出函数
+void EightNum::show() { // 八数码输出函数
     for (int i = 0; i < 9; i++) {
         cout << num[i] << " ";
         if ((i + 1) % 3 == 0)
@@ -96,12 +96,12 @@ void EightNum::show() { //八数码输出函数
     }
 }
 
-void EightNum::show_spec(int i) { //结果步骤输出函数
+void EightNum::show_spec(int i) { // 结果步骤输出函数
     cout << num[i];
     cout << "<--";
 }
 
-int EightNum::null_position() { //查找空格位置
+int EightNum::null_position() { // 查找空格位置
     int i, j;
     for (i = 0; i < 9; i++) {
         if (num[i] == 0)
@@ -110,7 +110,8 @@ int EightNum::null_position() { //查找空格位置
     return j;
 }
 
-EightNum &EightNum::operator=(EightNum &NewEightN) { //"="重载,针对八数码类的引用
+EightNum &
+EightNum::operator=(EightNum &NewEightN) { //"="重载,针对八数码类的引用
     for (int i = 0; i < 9; i++)
         num[i] = NewEightN.num[i];
     diffnum = NewEightN.diffnum;
@@ -125,7 +126,8 @@ EightNum &EightNum::operator=(int num2[9]) { //"="重载,用于数组赋值
     return *this;
 }
 
-int EightNum::operator==(EightNum &NewEightN) { //"=="重载,用于八数码类中状态的比较
+int EightNum::operator==(
+    EightNum &NewEightN) { //"=="重载,用于八数码类中状态的比较
     int compere = 1;
     for (int i = 0; i < 9; i++)
         if (num[i] != NewEightN.num[i]) {
@@ -151,9 +153,10 @@ int EightNum::operator==(int num2[9]) { //"=="重载,用于数组的比较
     else
         return 1;
 }
-//八数码类函数定义结束
+// 八数码类函数定义结束
 
-int solve(int num[9], int target[9]) { //判断是否有解的函数,利用逆序数的奇偶性来判断
+int solve(int num[9],
+          int target[9]) { // 判断是否有解的函数,利用逆序数的奇偶性来判断
     int i, j;
     int num_con = 0, tar_con = 0;
     for (i = 0; i < 9; i++)
@@ -171,8 +174,8 @@ int solve(int num[9], int target[9]) { //判断是否有解的函数,利用逆�
         return 0;
 }
 
-//空格移动函数
-int moveup(int num[9]) { //空格上移
+// 空格移动函数
+int moveup(int num[9]) { // 空格上移
     for (int i = 0; i < 9; i++) {
 
         if (num[i] == 0)
@@ -187,7 +190,7 @@ int moveup(int num[9]) { //空格上移
     }
 }
 
-int movedown(int num[9]) { //空格下移
+int movedown(int num[9]) { // 空格下移
     for (int i = 0; i < 9; i++) {
 
         if (num[i] == 0)
@@ -202,7 +205,7 @@ int movedown(int num[9]) { //空格下移
     }
 }
 
-int moveleft(int num[9]) { //空格左移
+int moveleft(int num[9]) { // 空格左移
     for (int i = 0; i < 9; i++) {
 
         if (num[i] == 0)
@@ -217,7 +220,7 @@ int moveleft(int num[9]) { //空格左移
     }
 }
 
-int moveright(int num[9]) { //空格右移
+int moveright(int num[9]) { // 空格右移
     for (int i = 0; i < 9; i++) {
 
         if (num[i] == 0)
@@ -232,16 +235,16 @@ int moveright(int num[9]) { //空格右移
     }
 }
 
-int exist(int num[9], EightNum *a) { //判断是否重复搜索函数
+int exist(int num[9], EightNum *a) { // 判断是否重复搜索函数
     EightNum *t;
     for (t = a; t != NULL; t = t->parent)
         if (*t == num)
-            return 1; //调用"=="进行数组比较
+            return 1; // 调用"=="进行数组比较
         else
             return 0;
 }
 
-EightNum *find(EightNum *s) { //寻找估价函数值最小的节点
+EightNum *find(EightNum *s) { // 寻找估价函数值最小的节点
     EightNum *m, *n;
     int min = s->get_evalfun();
     m = n = s;
@@ -254,16 +257,17 @@ EightNum *find(EightNum *s) { //寻找估价函数值最小的节点
     }
 }
 
-int main(void) //主函数
+int main(void) // 主函数
 {
     int i, j;
     int flag;
     int num[9];
     int error;
 
-    do { //输入判断
+    do { // 输入判断
         error = 0;
-        cout << "请输入八数码问题的初始状态(用0代表空格,中间用空格隔开):" << endl;
+        cout << "请输入八数码问题的初始状态(用0代表空格,中间用空格隔开):"
+             << endl;
         for (i = 0; i < 9; i++) {
             flag = 0;
             cin >> num[i];
@@ -301,7 +305,7 @@ int main(void) //主函数
         } while (error1 != 0);
     }
 
-    //实例化初始状态和目标状态,并输出.
+    // 实例化初始状态和目标状态,并输出.
     EightNum start(num), Target(target);
     start.parent = start.state_next = start.state_pre = NULL;
     start.eval_func();
@@ -309,30 +313,30 @@ int main(void) //主函数
     start.show();
     cout << "目标状态为:" << endl;
     Target.show();
-    //判断是否有解
+    // 判断是否有解
     int m = solve(num, target);
     if (m == 0) {
         cout << "此状态无解!" << endl;
         return 0;
     }
 
-    //进入A*算法搜索
+    // 进入A*算法搜索
     double time;
     clock_t startt, finisht;
-    int ok = 0;    //结束标识位
-    int space = 0; //所耗费空间
+    int ok = 0;    // 结束标识位
+    int space = 0; // 所耗费空间
 
-    startt = clock(); //开始时间
+    startt = clock(); // 开始时间
     EightNum *BestNode = &start, *Node = &start, *New8Num, *r;
     while (BestNode != NULL && ok != 1) {
         BestNode = find(Node);
-        if (*BestNode == Target) { //调用"=="操作符
+        if (*BestNode == Target) { // 调用"=="操作符
             ok = 1;
             break;
         }
         r = BestNode->state_pre;
 
-        //生成向上移的节点
+        // 生成向上移的节点
         BestNode->getnum(num);
         if (moveup(num) && !exist(num, BestNode)) {
             New8Num = new EightNum;
@@ -348,7 +352,7 @@ int main(void) //主函数
             space++;
         }
 
-        //生成向下移的节点
+        // 生成向下移的节点
         BestNode->getnum(num);
         if (movedown(num) && !exist(num, BestNode)) {
             New8Num = new EightNum;
@@ -364,7 +368,7 @@ int main(void) //主函数
             space++;
         }
 
-        //生成向左移的节点
+        // 生成向左移的节点
         BestNode->getnum(num);
         if (moveleft(num) && !exist(num, BestNode)) {
             New8Num = new EightNum;
@@ -380,7 +384,7 @@ int main(void) //主函数
             space++;
         }
 
-        //生成向右移的节点
+        // 生成向右移的节点
         BestNode->getnum(num);
         if (moveright(num) && !exist(num, BestNode)) {
             New8Num = new EightNum;
@@ -403,9 +407,9 @@ int main(void) //主函数
     }
     finisht = clock();
 
-    //输出搜索结果
+    // 输出搜索结果
     if (ok == 1) {
-        time = (double) (finisht - startt) * 1000 / CLOCKS_PER_SEC;
+        time = (double)(finisht - startt) * 1000 / CLOCKS_PER_SEC;
         EightNum *p, *q = NULL;
         int step = 0;
         for (p = BestNode->parent; p != NULL; p->parent) {
@@ -417,7 +421,8 @@ int main(void) //主函数
                 p->show_spec(i);
                 i = p->null_position();
             }
-            if (step == 8 || step == 18 || step == 28 || step == 38 || step == 48)
+            if (step == 8 || step == 18 || step == 28 || step == 38 ||
+                step == 48)
                 cout << "\n";
             step++;
         }
@@ -434,4 +439,3 @@ int main(void) //主函数
     } else
         cout << "\nA*算法无法找到最短路径!\n";
 }
-

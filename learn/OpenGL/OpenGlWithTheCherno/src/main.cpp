@@ -1,13 +1,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <fmt/core.h>
-#include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 #include "Renderer.h"
-#include "VertexBufferLayout.h"
 #include "Texture.h"
+#include "VertexBufferLayout.h"
 #include "imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 #include "tests/TestClearColor.h"

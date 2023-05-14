@@ -5,6 +5,7 @@
 #include <iostream>
 
 int main() {
-    std::cout << "12";
+    std::cout << "1hello" << std::endl;
+    // std::cout << "你好" << std::endl;
     return 0;
 }

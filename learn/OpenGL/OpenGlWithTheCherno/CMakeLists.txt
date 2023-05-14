@@ -5,6 +5,7 @@ project(OpenGlWithTheCherno)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
+set(-DCMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 include_directories(./include)
 
