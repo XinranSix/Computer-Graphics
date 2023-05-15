@@ -10,7 +10,7 @@ void trackBar(int, void *);
 int s1 = 0, s2 = 0;
 Mat src, dst;
 int main() {
-    src = imread("D:/Computer-Graphics/images/title/eva/829601.png");
+    src = imread("D:/Computer-Graphics/learn/cpp/assets/E7BFC16743F2B9453C2178E5FF40C23F.png");
     if (src.empty()) {
         printf("can not load image \n");
         return -1;
