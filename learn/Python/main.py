@@ -26,7 +26,7 @@ def buildTree(preorder: list[int], inorder: list[int]) -> TreeNode:
     return root
 
 
-def dfs(root: TreeNode) -> list[int]:
+def dfs(root: TreeNode):
     if not root:
         return []
     return [root.val] + dfs(root.left) + dfs(root.right)

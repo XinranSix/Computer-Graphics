@@ -10,3 +10,5 @@ foreach (var ${SRC_LIST})
     string(SUBSTRING ${var} 2 ${len} post)
     add_executable("${pre}_${post}" ${var})
 endforeach ()
+
+
