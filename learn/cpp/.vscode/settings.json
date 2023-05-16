@@ -1,6 +1,5 @@
 {
     "clangd.fallbackFlags": [
-        "-Id:/msys64/clang64/include/c++/v1",
         "-I${workspaceFolder}/include",
     ],
     "files.associations": {
@@ -88,5 +87,6 @@
         "semaphore": "cpp",
         "cinttypes": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
