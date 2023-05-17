@@ -88,5 +88,6 @@
         "cinttypes": "cpp",
         "variant": "cpp"
     },
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "qtConfigure.qtKitDir": "d:/software/Qt/6.5.0/mingw_64"
 }

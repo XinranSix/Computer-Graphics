@@ -1,0 +1,8 @@
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/untitled.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/install.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+D:/workspace/Computer-Graphics/learn/qt/build-untitled-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/CMakeFiles/untitled_autogen.dir
