@@ -4,10 +4,10 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-#include <string>
 #include <fstream>
-#include <sstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <unordered_map>
 
 class Shader {
@@ -17,7 +17,8 @@ public:
 
     // 构造函数动态生成着色器
     // ------------------------------------------------------------------------
-    Shader(const char *vertexPath, const char *fragmentPath, const char *geometryPath = nullptr) {
+    Shader(const char *vertexPath, const char *fragmentPath,
+           const char *geometryPath = nullptr) {
         // 1.从文件路径中获取顶点/片段源代码
         std::string vertexCode;
         std::string fragmentCode;
@@ -51,9 +52,9 @@ public:
                 gShaderFile.close();
                 geometryCode = gShaderStream.str();
             }
-        }
-        catch (std::ifstream::failure &e) {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " << e.what() << std::endl;
+        } catch (std::ifstream::failure &e) {
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: "
+                      << e.what() << std::endl;
         }
         const char *vShaderCode = vertexCode.c_str();
         const char *fShaderCode = fragmentCode.c_str();
@@ -91,19 +92,16 @@ public:
         glDeleteShader(fragment);
         if (geometryPath != nullptr)
             glDeleteShader(geometry);
-
     }
 
     // 选择着色器程序
     // ------------------------------------------------------------------------
-    void use() {
-        glUseProgram(ID);
-    }
+    void use() { glUseProgram(ID); }
 
     // uniform的实用函数
     // ------------------------------------------------------------------------
     void setBool(const std::string &name, bool value) const {
-        glUniform1i(getUniformLocation(name.c_str()), (int) value);
+        glUniform1i(getUniformLocation(name.c_str()), (int)value);
     }
 
     // ------------------------------------------------------------------------
@@ -114,7 +112,7 @@ public:
     // ------------------------------------------------------------------------
     void setFloat(const std::string &name, float value) const {
         glUniform1f(getUniformLocation(name.c_str()), value);
-        //glUniform1i(glGetUniformLocation(ID, name.c_str()),  value);
+        // glUniform1i(glGetUniformLocation(ID, name.c_str()),  value);
     }
 
     // ------------------------------------------------------------------------
@@ -146,17 +144,20 @@ public:
 
     // ------------------------------------------------------------------------
     void setMat2(const std::string &name, const glm::mat2 &mat) const {
-        glUniformMatrix2fv(getUniformLocation(name.c_str()), 1, GL_FALSE, &mat[0][0]);
+        glUniformMatrix2fv(getUniformLocation(name.c_str()), 1, GL_FALSE,
+                           &mat[0][0]);
     }
 
     // ------------------------------------------------------------------------
     void setMat3(const std::string &name, const glm::mat3 &mat) const {
-        glUniformMatrix3fv(getUniformLocation(name.c_str()), 1, GL_FALSE, &mat[0][0]);
+        glUniformMatrix3fv(getUniformLocation(name.c_str()), 1, GL_FALSE,
+                           &mat[0][0]);
     }
 
     // ------------------------------------------------------------------------
     void setMat4(const std::string &name, const glm::mat4 &mat) const {
-        glUniformMatrix4fv(getUniformLocation(name.c_str()), 1, GL_FALSE, &mat[0][0]);
+        glUniformMatrix4fv(getUniformLocation(name.c_str()), 1, GL_FALSE,
+                           &mat[0][0]);
     }
 
 private:
@@ -169,15 +170,24 @@ private:
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog
-                          << "\n -- --------------------------------------------------- -- " << std::endl;
+                std::cout
+                    << "ERROR::SHADER_COMPILATION_ERROR of type: " << type
+                    << "\n"
+                    << infoLog
+                    << "\n -- "
+                       "--------------------------------------------------- -- "
+                    << std::endl;
             }
         } else {
             glGetProgramiv(shader, GL_LINK_STATUS, &success);
             if (!success) {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog
-                          << "\n -- --------------------------------------------------- -- " << std::endl;
+                std::cout
+                    << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
+                    << infoLog
+                    << "\n -- "
+                       "--------------------------------------------------- -- "
+                    << std::endl;
             }
         }
     }

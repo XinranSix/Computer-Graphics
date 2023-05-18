@@ -1,26 +1,24 @@
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 #include <fmt/core.h>
+#include <glad/glad.h>
+#include <iostream>
 
-void processInput(GLFWwindow* window);
 
-float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f
-};
+void processInput(GLFWwindow *window);
 
-const char* vertexShaderSource = "#version 330 core\n"
-                                 "layout (location = 0) in vec3 aPos;\n"
-                                 "out vec4 vertexColor;\n"
-                                 "void main()\n"
-                                 "{\n"
-                                 " gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-                                 "vertexColor = vec4(0.5f, 0.0f, 0.0f, 1.0f);\n"
-                                 "}\0";
+float vertices[] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f};
 
-const char* fragmentShaderSource = "#version 330 core\n"
+const char *vertexShaderSource =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "out vec4 vertexColor;\n"
+    "void main()\n"
+    "{\n"
+    " gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "vertexColor = vec4(0.5f, 0.0f, 0.0f, 1.0f);\n"
+    "}\0";
+
+const char *fragmentShaderSource = "#version 330 core\n"
                                    "out vec4 FragColor;\n"
                                    "in vec4 vertexColor;\n"
                                    "void main()\n"
@@ -36,17 +34,17 @@ int main() {
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     if (window == nullptr) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
-    //GLFW将窗口的上下文设置为当前线程的上下文
+    // GLFW将窗口的上下文设置为当前线程的上下文
     glfwMakeContextCurrent(window);
 
-    //GLAD
-    // glad: 加载所有OpenGL函数指针
+    // GLAD
+    //  glad: 加载所有OpenGL函数指针
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
@@ -63,7 +61,8 @@ int main() {
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+                  << infoLog << std::endl;
     }
     // 片段着色器
     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -73,36 +72,39 @@ int main() {
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
+                  << infoLog << std::endl;
     }
-    //着色器程序
+    // 着色器程序
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
-    //链接错误检查
+    // 链接错误检查
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+                  << infoLog << std::endl;
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    //创建VBO和VAO对象，并赋予ID
+    // 创建VBO和VAO对象，并赋予ID
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    //绑定VBO和VAO对象
+    // 绑定VBO和VAO对象
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    //为当前绑定到target的缓冲区对象创建一个新的数据存储。
-    //如果data不是NULL，则使用来自此指针的数据初始化数据存储
+    // 为当前绑定到target的缓冲区对象创建一个新的数据存储。
+    // 如果data不是NULL，则使用来自此指针的数据初始化数据存储
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    //告知Shader如何解析缓冲里的属性值
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    //开启VAO管理的第一个属性值
+    // 告知Shader如何解析缓冲里的属性值
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                          (void *)0);
+    // 开启VAO管理的第一个属性值
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -111,8 +113,8 @@ int main() {
     // 渲染循环
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); //状态设置
-        glClear(GL_COLOR_BUFFER_BIT); //状态使用
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // 状态设置
+        glClear(GL_COLOR_BUFFER_BIT);         // 状态使用
 
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
@@ -130,7 +132,7 @@ int main() {
     return 0;
 }
 
-void processInput(GLFWwindow* window) {
+void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }

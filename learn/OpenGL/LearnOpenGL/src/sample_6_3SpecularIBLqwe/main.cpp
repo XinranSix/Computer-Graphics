@@ -1,14 +1,14 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
-#include <cmath>
+#include "camera.h"
+#include "model.h"
 #include "shader.h"
 #include "stb_image.h"
-#include "camera.h"
+#include <GLFW/glfw3.h>
+#include <cmath>
+#include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "model.h"
+#include <iostream>
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
@@ -55,7 +55,8 @@ int main() {
 
     // glfw window creation
     // --------------------
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window =
+        glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     glfwMakeContextCurrent(window);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -69,7 +70,7 @@ int main() {
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
@@ -79,18 +80,20 @@ int main() {
     glEnable(GL_DEPTH_TEST);
     // set depth function to less than AND equal for skybox depth trick.
     glDepthFunc(GL_LEQUAL);
-    // enable seamless cubemap sampling for lower mip levels in the pre-filter map.
+    // enable seamless cubemap sampling for lower mip levels in the pre-filter
+    // map.
     glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
     // build and compile shaders
     // -------------------------
     Shader pbrShader("shaders/pbr.vs", "shaders/pbr.fs");
-    Shader equirectangularToCubemapShader("shaders/cubemap.vs", "shaders/equirectangularToCubemap.fs");
-    Shader irradianceShader("shaders/cubemap.vs", "shaders/irradiance_convolution.fs");
+    Shader equirectangularToCubemapShader(
+        "shaders/cubemap.vs", "shaders/equirectangularToCubemap.fs");
+    Shader irradianceShader("shaders/cubemap.vs",
+                            "shaders/irradiance_convolution.fs");
     Shader prefilterShader("shaders/cubemap.vs", "shaders/prefilter.fs");
     Shader brdfShader("shaders/brdf.vs", "shaders/brdf.fs");
     Shader backgroundShader("shaders/background.vs", "shaders/background.fs");
-
 
     pbrShader.use();
     pbrShader.setInt("irradianceMap", 0);
@@ -108,53 +111,75 @@ int main() {
     // load PBR material textures
     // --------------------------
     // rusted iron
-    unsigned int ironAlbedoMap = loadTexture("./assets/textures/pbr/rusted_iron/albedo.png");
-    unsigned int ironNormalMap = loadTexture("./assets/textures/pbr/rusted_iron/normal.png");
-    unsigned int ironMetallicMap = loadTexture("./assets/textures/pbr/rusted_iron/metallic.png");
-    unsigned int ironRoughnessMap = loadTexture("./assets/textures/pbr/rusted_iron/roughness.png");
-    unsigned int ironAOMap = loadTexture("./assets/textures/pbr/rusted_iron/ao.png");
+    unsigned int ironAlbedoMap =
+        loadTexture("./assets/textures/pbr/rusted_iron/albedo.png");
+    unsigned int ironNormalMap =
+        loadTexture("./assets/textures/pbr/rusted_iron/normal.png");
+    unsigned int ironMetallicMap =
+        loadTexture("./assets/textures/pbr/rusted_iron/metallic.png");
+    unsigned int ironRoughnessMap =
+        loadTexture("./assets/textures/pbr/rusted_iron/roughness.png");
+    unsigned int ironAOMap =
+        loadTexture("./assets/textures/pbr/rusted_iron/ao.png");
     // gold
-    unsigned int goldAlbedoMap = loadTexture("./assets/textures/pbr/light-gold-bl/albedo.png");
-    unsigned int goldNormalMap = loadTexture("./assets/textures/pbr/light-gold-bl/normal.png");
-    unsigned int goldMetallicMap = loadTexture("./assets/textures/pbr/light-gold-bl/metallic.png");
-    unsigned int goldRoughnessMap = loadTexture("./assets/textures/pbr/light-gold-bl/roughness.png");
-    unsigned int goldAOMap = loadTexture("./assets/textures/pbr/light-gold-bl/ao.png");
+    unsigned int goldAlbedoMap =
+        loadTexture("./assets/textures/pbr/light-gold-bl/albedo.png");
+    unsigned int goldNormalMap =
+        loadTexture("./assets/textures/pbr/light-gold-bl/normal.png");
+    unsigned int goldMetallicMap =
+        loadTexture("./assets/textures/pbr/light-gold-bl/metallic.png");
+    unsigned int goldRoughnessMap =
+        loadTexture("./assets/textures/pbr/light-gold-bl/roughness.png");
+    unsigned int goldAOMap =
+        loadTexture("./assets/textures/pbr/light-gold-bl/ao.png");
 
     // copper
-    unsigned int grassAlbedoMap = loadTexture("./assets/textures/pbr/Copper-scuffed_bl/albedo.png");
-    unsigned int grassNormalMap = loadTexture("./assets/textures/pbr/Copper-scuffed_bl/normal.png");
-    unsigned int grassMetallicMap = loadTexture("./assets/textures/pbr/Copper-scuffed_bl/metallic.png");
-    unsigned int grassRoughnessMap = loadTexture("./assets/textures/pbr/Copper-scuffed_bl/roughness.png");
-    unsigned int grassAOMap = loadTexture("./assets/textures/pbr/Copper-scuffed_bl/ao.png");
+    unsigned int grassAlbedoMap =
+        loadTexture("./assets/textures/pbr/Copper-scuffed_bl/albedo.png");
+    unsigned int grassNormalMap =
+        loadTexture("./assets/textures/pbr/Copper-scuffed_bl/normal.png");
+    unsigned int grassMetallicMap =
+        loadTexture("./assets/textures/pbr/Copper-scuffed_bl/metallic.png");
+    unsigned int grassRoughnessMap =
+        loadTexture("./assets/textures/pbr/Copper-scuffed_bl/roughness.png");
+    unsigned int grassAOMap =
+        loadTexture("./assets/textures/pbr/Copper-scuffed_bl/ao.png");
 
     // spaceship
-    unsigned int plasticAlbedoMap = loadTexture("./assets/textures/pbr/spaceship-panels-bl/albedo.png");
-    unsigned int plasticNormalMap = loadTexture("./assets/textures/pbr/spaceship-panels-bl/normal.png");
-    unsigned int plasticMetallicMap = loadTexture("./assets/textures/pbr/spaceship-panels-bl/metallic.png");
-    unsigned int plasticRoughnessMap = loadTexture("./assets/textures/pbr/spaceship-panels-bl/roughness.png");
-    unsigned int plasticAOMap = loadTexture("./assets/textures/pbr/spaceship-panels-bl/ao.png");
+    unsigned int plasticAlbedoMap =
+        loadTexture("./assets/textures/pbr/spaceship-panels-bl/albedo.png");
+    unsigned int plasticNormalMap =
+        loadTexture("./assets/textures/pbr/spaceship-panels-bl/normal.png");
+    unsigned int plasticMetallicMap =
+        loadTexture("./assets/textures/pbr/spaceship-panels-bl/metallic.png");
+    unsigned int plasticRoughnessMap =
+        loadTexture("./assets/textures/pbr/spaceship-panels-bl/roughness.png");
+    unsigned int plasticAOMap =
+        loadTexture("./assets/textures/pbr/spaceship-panels-bl/ao.png");
 
     // wall
-    unsigned int wallAlbedoMap = loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/albedo.png");
-    unsigned int wallNormalMap = loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/normal.png");
-    unsigned int wallMetallicMap = loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/metallic.png");
-    unsigned int wallRoughnessMap = loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/roughness.png");
-    unsigned int wallAOMap = loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/ao.png");
+    unsigned int wallAlbedoMap =
+        loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/albedo.png");
+    unsigned int wallNormalMap =
+        loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/normal.png");
+    unsigned int wallMetallicMap = loadTexture(
+        "./assets/textures/pbr/gray-granite-flecks-bl/metallic.png");
+    unsigned int wallRoughnessMap = loadTexture(
+        "./assets/textures/pbr/gray-granite-flecks-bl/roughness.png");
+    unsigned int wallAOMap =
+        loadTexture("./assets/textures/pbr/gray-granite-flecks-bl/ao.png");
 
     // lights
     // ------
     glm::vec3 lightPositions[] = {
-            glm::vec3(-10.0f, 10.0f, 10.0f),
-            glm::vec3(10.0f, 10.0f, 10.0f),
-            glm::vec3(-10.0f, -10.0f, 10.0f),
-            glm::vec3(10.0f, -10.0f, 10.0f),
+        glm::vec3(-10.0f, 10.0f, 10.0f),
+        glm::vec3(10.0f, 10.0f, 10.0f),
+        glm::vec3(-10.0f, -10.0f, 10.0f),
+        glm::vec3(10.0f, -10.0f, 10.0f),
     };
     glm::vec3 lightColors[] = {
-            glm::vec3(300.0f, 300.0f, 300.0f),
-            glm::vec3(300.0f, 300.0f, 300.0f),
-            glm::vec3(300.0f, 300.0f, 300.0f),
-            glm::vec3(300.0f, 300.0f, 300.0f)
-    };
+        glm::vec3(300.0f, 300.0f, 300.0f), glm::vec3(300.0f, 300.0f, 300.0f),
+        glm::vec3(300.0f, 300.0f, 300.0f), glm::vec3(300.0f, 300.0f, 300.0f)};
 
     // pbr: setup framebuffer
     // ----------------------
@@ -166,20 +191,23 @@ int main() {
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
+                              GL_RENDERBUFFER, captureRBO);
 
     // pbr: load the HDR environment map
     // ---------------------------------
     stbi_set_flip_vertically_on_load(true);
     int width, height, nrComponents;
-    float *data = stbi_loadf("./assets/textures/pbr/Alexs_Apartment/Alexs_Apt_2k.hdr", &width, &height, &nrComponents,
-                             0);
+    float *data =
+        stbi_loadf("./assets/textures/pbr/Alexs_Apartment/Alexs_Apt_2k.hdr",
+                   &width, &height, &nrComponents, 0);
     unsigned int hdrTexture;
     if (data) {
         glGenTextures(1, &hdrTexture);
         glBindTexture(GL_TEXTURE_2D, hdrTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT,
-                     data); // note how we specify the texture's data value to be float
+        glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGB16F, width, height, 0, GL_RGB, GL_FLOAT,
+            data); // note how we specify the texture's data value to be float
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -197,29 +225,36 @@ int main() {
     glGenTextures(1, &envCubemap);
     glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
     for (unsigned int i = 0; i < 6; ++i) {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 512, 512, 0, GL_RGB, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 512, 512,
+                     0, GL_RGB, GL_FLOAT, nullptr);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
-                    GL_LINEAR_MIPMAP_LINEAR); // enable pre-filter mipmap sampling (combatting visible dots artifact)
+    glTexParameteri(
+        GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
+        GL_LINEAR_MIPMAP_LINEAR); // enable pre-filter mipmap sampling
+                                  // (combatting visible dots artifact)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // pbr: set up projection and view matrices for capturing data onto the 6 cubemap face directions
+    // pbr: set up projection and view matrices for capturing data onto the 6
+    // cubemap face directions
     // ----------------------------------------------------------------------------------------------
-    glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
-    glm::mat4 captureViews[] =
-            {
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f)),
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f),
-                                glm::vec3(0.0f, -1.0f, 0.0f)),
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)),
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f),
-                                glm::vec3(0.0f, 0.0f, -1.0f)),
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f)),
-                    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, -1.0f, 0.0f))
-            };
+    glm::mat4 captureProjection =
+        glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+    glm::mat4 captureViews[] = {
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
+                    glm::vec3(0.0f, -1.0f, 0.0f)),
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f),
+                    glm::vec3(0.0f, -1.0f, 0.0f)),
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
+                    glm::vec3(0.0f, 0.0f, 1.0f)),
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f),
+                    glm::vec3(0.0f, 0.0f, -1.0f)),
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f),
+                    glm::vec3(0.0f, -1.0f, 0.0f)),
+        glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f),
+                    glm::vec3(0.0f, -1.0f, 0.0f))};
 
     // pbr: convert HDR equirectangular environment map to cubemap equivalent
     // ----------------------------------------------------------------------
@@ -229,28 +264,34 @@ int main() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, hdrTexture);
 
-    glViewport(0, 0, 512, 512); // don't forget to configure the viewport to the capture dimensions.
+    glViewport(0, 0, 512, 512); // don't forget to configure the viewport to the
+                                // capture dimensions.
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     for (unsigned int i = 0; i < 6; ++i) {
         equirectangularToCubemapShader.setMat4("view", captureViews[i]);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, envCubemap, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                               GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, envCubemap,
+                               0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderCube();
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    // then let OpenGL generate mipmaps from first mip face (combatting visible dots artifact)
+    // then let OpenGL generate mipmaps from first mip face (combatting visible
+    // dots artifact)
     glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
     glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 
-    // pbr: create an irradiance cubemap, and re-scale capture FBO to irradiance scale.
+    // pbr: create an irradiance cubemap, and re-scale capture FBO to irradiance
+    // scale.
     // --------------------------------------------------------------------------------
     unsigned int irradianceMap;
     glGenTextures(1, &irradianceMap);
     glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap);
     for (unsigned int i = 0; i < 6; ++i) {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 32, 32, 0, GL_RGB, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 32, 32,
+                     0, GL_RGB, GL_FLOAT, nullptr);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -262,7 +303,8 @@ int main() {
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 32, 32);
 
-    // pbr: solve diffuse integral by convolution to create an irradiance (cube)map.
+    // pbr: solve diffuse integral by convolution to create an irradiance
+    // (cube)map.
     // -----------------------------------------------------------------------------
     irradianceShader.use();
     irradianceShader.setInt("environmentMap", 0);
@@ -270,36 +312,43 @@ int main() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
 
-    glViewport(0, 0, 32, 32); // don't forget to configure the viewport to the capture dimensions.
+    glViewport(0, 0, 32, 32); // don't forget to configure the viewport to the
+                              // capture dimensions.
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     for (unsigned int i = 0; i < 6; ++i) {
         irradianceShader.setMat4("view", captureViews[i]);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap,
-                               0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                               GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                               irradianceMap, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         renderCube();
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    // pbr: create a pre-filter cubemap, and re-scale capture FBO to pre-filter scale.
+    // pbr: create a pre-filter cubemap, and re-scale capture FBO to pre-filter
+    // scale.
     // --------------------------------------------------------------------------------
     unsigned int prefilterMap;
     glGenTextures(1, &prefilterMap);
     glBindTexture(GL_TEXTURE_CUBE_MAP, prefilterMap);
     for (unsigned int i = 0; i < 6; ++i) {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 128, 128, 0, GL_RGB, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB16F, 128, 128,
+                     0, GL_RGB, GL_FLOAT, nullptr);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
-                    GL_LINEAR_MIPMAP_LINEAR); // be sure to set minification filter to mip_linear 
+                    GL_LINEAR_MIPMAP_LINEAR); // be sure to set minification
+                                              // filter to mip_linear
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // generate mipmaps for the cubemap so OpenGL automatically allocates the required memory.
+    // generate mipmaps for the cubemap so OpenGL automatically allocates the
+    // required memory.
     glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 
-    // pbr: run a quasi monte-carlo simulation on the environment lighting to create a prefilter (cube)map.
+    // pbr: run a quasi monte-carlo simulation on the environment lighting to
+    // create a prefilter (cube)map.
     // ----------------------------------------------------------------------------------------------------
     prefilterShader.use();
     prefilterShader.setInt("environmentMap", 0);
@@ -311,17 +360,21 @@ int main() {
     unsigned int maxMipLevels = 5;
     for (unsigned int mip = 0; mip < maxMipLevels; ++mip) {
         // reisze framebuffer according to mip-level size.
-        unsigned int mipWidth = static_cast<unsigned int>(128 * std::pow(0.5, mip));
-        unsigned int mipHeight = static_cast<unsigned int>(128 * std::pow(0.5, mip));
+        unsigned int mipWidth =
+            static_cast<unsigned int>(128 * std::pow(0.5, mip));
+        unsigned int mipHeight =
+            static_cast<unsigned int>(128 * std::pow(0.5, mip));
         glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth,
+                              mipHeight);
         glViewport(0, 0, mipWidth, mipHeight);
 
-        float roughness = (float) mip / (float) (maxMipLevels - 1);
+        float roughness = (float)mip / (float)(maxMipLevels - 1);
         prefilterShader.setFloat("roughness", roughness);
         for (unsigned int i = 0; i < 6; ++i) {
             prefilterShader.setMat4("view", captureViews[i]);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                   GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
                                    prefilterMap, mip);
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -344,11 +397,13 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // then re-configure capture framebuffer object and render screen-space quad with BRDF shader.
+    // then re-configure capture framebuffer object and render screen-space quad
+    // with BRDF shader.
     glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
     glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUTTexture, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+                           brdfLUTTexture, 0);
 
     glViewport(0, 0, 512, 512);
     brdfShader.use();
@@ -357,17 +412,18 @@ int main() {
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-
     // initialize static shader uniforms before rendering
     // --------------------------------------------------
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f,
-                                            100.0f);
+    glm::mat4 projection =
+        glm::perspective(glm::radians(camera.Zoom),
+                         (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     pbrShader.use();
     pbrShader.setMat4("projection", projection);
     backgroundShader.use();
     backgroundShader.setMat4("projection", projection);
 
-    // then before rendering, configure the viewport to the original framebuffer's screen dimensions
+    // then before rendering, configure the viewport to the original
+    // framebuffer's screen dimensions
     int scrWidth, scrHeight;
     glfwGetFramebufferSize(window, &scrWidth, &scrHeight);
     glViewport(0, 0, scrWidth, scrHeight);
@@ -390,7 +446,8 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // render scene, supplying the convoluted irradiance map to the final shader.
+        // render scene, supplying the convoluted irradiance map to the final
+        // shader.
         // ------------------------------------------------------------------------------------------
         pbrShader.use();
         glm::mat4 model = glm::mat4(1.0f);
@@ -492,13 +549,18 @@ int main() {
         renderSphere();
 
         // render light source (simply re-render sphere at light positions)
-        // this looks a bit off as we use the same shader, but it'll make their positions obvious and 
-        // keeps the codeprint small.
-        for (unsigned int i = 0; i < sizeof(lightPositions) / sizeof(lightPositions[0]); ++i) {
-            glm::vec3 newPos = lightPositions[i] + glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
+        // this looks a bit off as we use the same shader, but it'll make their
+        // positions obvious and keeps the codeprint small.
+        for (unsigned int i = 0;
+             i < sizeof(lightPositions) / sizeof(lightPositions[0]); ++i) {
+            glm::vec3 newPos =
+                lightPositions[i] +
+                glm::vec3(sin(glfwGetTime() * 5.0) * 5.0, 0.0, 0.0);
             newPos = lightPositions[i];
-            pbrShader.setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
-            pbrShader.setVec3("lightColors[" + std::to_string(i) + "]", lightColors[i]);
+            pbrShader.setVec3("lightPositions[" + std::to_string(i) + "]",
+                              newPos);
+            pbrShader.setVec3("lightColors[" + std::to_string(i) + "]",
+                              lightColors[i]);
 
             model = glm::mat4(1.0f);
             model = glm::translate(model, newPos);
@@ -513,16 +575,17 @@ int main() {
         backgroundShader.setMat4("view", view);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
-        //glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap); // display irradiance map
-        //glBindTexture(GL_TEXTURE_CUBE_MAP, prefilterMap); // display prefilter map
+        // glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap); // display
+        // irradiance map glBindTexture(GL_TEXTURE_CUBE_MAP, prefilterMap); //
+        // display prefilter map
         renderCube();
 
         // render BRDF map to screen
-        //brdfShader.Use();
-        //renderQuad();
+        // brdfShader.Use();
+        // renderQuad();
 
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse
+        // moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -534,7 +597,8 @@ int main() {
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
+// process all input: query GLFW whether relevant keys are pressed/released this
+// frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -550,14 +614,15 @@ void processInput(GLFWwindow *window) {
         camera.ProcessKeyboard(RIGHT, deltaTime);
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// glfw: whenever the window size changed (by OS or user resize) this callback
+// function executes
 // ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
+    // make sure the viewport matches the new window dimensions; note that width
+    // and height will be significantly larger than specified on retina
+    // displays.
     glViewport(0, 0, width, height);
 }
-
 
 // glfw: whenever the mouse moves, this callback is called
 // -------------------------------------------------------
@@ -572,7 +637,8 @@ void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {
     }
 
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+    float yoffset =
+        lastY - ypos; // reversed since y-coordinates go from bottom to top
 
     lastX = xpos;
     lastY = ypos;
@@ -609,11 +675,13 @@ void renderSphere() {
         const float PI = 3.14159265359f;
         for (unsigned int x = 0; x <= X_SEGMENTS; ++x) {
             for (unsigned int y = 0; y <= Y_SEGMENTS; ++y) {
-                float xSegment = (float) x / (float) X_SEGMENTS;
-                float ySegment = (float) y / (float) Y_SEGMENTS;
-                float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+                float xSegment = (float)x / (float)X_SEGMENTS;
+                float ySegment = (float)y / (float)Y_SEGMENTS;
+                float xPos =
+                    std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
                 float yPos = std::cos(ySegment * PI);
-                float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+                float zPos =
+                    std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
 
                 positions.push_back(glm::vec3(xPos, yPos, zPos));
                 uv.push_back(glm::vec2(xSegment, ySegment));
@@ -656,16 +724,21 @@ void renderSphere() {
         }
         glBindVertexArray(sphereVAO);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), &data[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), &data[0],
+                     GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                     indices.size() * sizeof(unsigned int), &indices[0],
+                     GL_STATIC_DRAW);
         unsigned int stride = (3 + 2 + 3) * sizeof(float);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void *) 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void *)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void *) (3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride,
+                              (void *)(3 * sizeof(float)));
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void *) (6 * sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride,
+                              (void *)(6 * sizeof(float)));
     }
 
     glBindVertexArray(sphereVAO);
@@ -681,62 +754,66 @@ void renderCube() {
     // initialize (if necessary)
     if (cubeVAO == 0) {
         float vertices[] = {
-                // back face
-                -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
-                1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right
-                1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
-                1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right
-                -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
-                -1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, // top-left
-                // front face
-                -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
-                1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, // bottom-right
-                1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top-right
-                1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top-right
-                -1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // top-left
-                -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
-                // left face
-                -1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-                -1.0f, 1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-left
-                -1.0f, -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
-                -1.0f, -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
-                -1.0f, -1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom-right
-                -1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-                // right face
-                1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-left
-                1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
-                1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-right         
-                1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
-                1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-left
-                1.0f, -1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom-left     
-                // bottom face
-                -1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-                1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top-left
-                1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom-left
-                1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom-left
-                -1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom-right
-                -1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-                // top face
-                -1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
-                1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-                1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top-right     
-                1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-                -1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
-                -1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f  // bottom-left        
+            // back face
+            -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+            1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,   // top-right
+            1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f,  // bottom-right
+            1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,   // top-right
+            -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+            -1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,  // top-left
+            // front face
+            -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
+            1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // bottom-right
+            1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,   // top-right
+            1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,   // top-right
+            -1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  // top-left
+            -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
+            // left face
+            -1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-right
+            -1.0f, 1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // top-left
+            -1.0f, -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
+            -1.0f, -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
+            -1.0f, -1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
+            -1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-right
+            // right face
+            1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-left
+            1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
+            1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // top-right
+            1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
+            1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,   // top-left
+            1.0f, -1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-left
+            // bottom face
+            -1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+            1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f,  // top-left
+            1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,   // bottom-left
+            1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,   // bottom-left
+            -1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
+            -1.0f, -1.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
+            // top face
+            -1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
+            1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom-right
+            1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,  // top-right
+            1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,   // bottom-right
+            -1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top-left
+            -1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f   // bottom-left
         };
         glGenVertexArrays(1, &cubeVAO);
         glGenBuffers(1, &cubeVBO);
         // fill buffer
         glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
+                     GL_STATIC_DRAW);
         // link vertex attributes
         glBindVertexArray(cubeVAO);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+                              (void *)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+                              (void *)(3 * sizeof(float)));
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+                              (void *)(6 * sizeof(float)));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
@@ -754,22 +831,23 @@ unsigned int quadVBO;
 void renderQuad() {
     if (quadVAO == 0) {
         float quadVertices[] = {
-                // positions        // texture Coords
-                -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-                -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-                1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-                1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+            // positions        // texture Coords
+            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+            1.0f,  1.0f, 0.0f, 1.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 0.0f,
         };
         // setup plane VAO
         glGenVertexArrays(1, &quadVAO);
         glGenBuffers(1, &quadVBO);
         glBindVertexArray(quadVAO);
         glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices,
+                     GL_STATIC_DRAW);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
+                              (void *)0);
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) (3 * sizeof(float)));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
+                              (void *)(3 * sizeof(float)));
     }
     glBindVertexArray(quadVAO);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -794,12 +872,14 @@ unsigned int loadTexture(char const *path) {
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format,
+                     GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                        GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
         stbi_image_free(data);

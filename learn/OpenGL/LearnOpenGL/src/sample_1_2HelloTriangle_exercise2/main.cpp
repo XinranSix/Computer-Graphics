@@ -1,37 +1,39 @@
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 #include <fmt/core.h>
+#include <glad/glad.h>
+#include <iostream>
 
 void processInput(GLFWwindow *window);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 float firstTriangle[] = {
-        -0.9f, -0.5f, 0.0f, // left
-        -0.0f, -0.5f, 0.0f, // right
-        -0.45f, 0.5f, 0.0f, // top
+    -0.9f,  -0.5f, 0.0f, // left
+    -0.0f,  -0.5f, 0.0f, // right
+    -0.45f, 0.5f,  0.0f, // top
 };
 
 float secondTriangle[] = {
-        0.0f, -0.5f, 0.0f, // left
-        0.9f, -0.5f, 0.0f, // right
-        0.45f, 0.5f, 0.0f // top
+    0.0f,  -0.5f, 0.0f, // left
+    0.9f,  -0.5f, 0.0f, // right
+    0.45f, 0.5f,  0.0f  // top
 };
 
-const char *vertexShaderSource = "#version 330 core\n"
-                                 "layout (location = 0) in vec3 aPos;\n"
-                                 "void main()\n"
-                                 "{\n"
-                                 " gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-                                 "}\0";
+const char *vertexShaderSource =
+    "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    " gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
 
-const char *fragmentShaderSource = "#version 330 core\n"
-                                   "out vec4 FragColor;\n"
-                                   "void main()\n"
-                                   "{\n"
-                                   " FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-                                   "}\n\0";
+const char *fragmentShaderSource =
+    "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    " FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
 
 int main() {
     glfwInit();
@@ -47,14 +49,14 @@ int main() {
         glfwTerminate();
         return -1;
     }
-    //GLFW将窗口的上下文设置为当前线程的上下文
+    // GLFW将窗口的上下文设置为当前线程的上下文
     glfwMakeContextCurrent(window);
-    //注册回调函数
+    // 注册回调函数
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    //GLAD
-    // glad: 加载所有OpenGL函数指针
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    // GLAD
+    //  glad: 加载所有OpenGL函数指针
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
@@ -70,7 +72,8 @@ int main() {
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+                  << infoLog << std::endl;
     }
     // 片段着色器
     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -80,18 +83,20 @@ int main() {
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
+                  << infoLog << std::endl;
     }
-    //着色器程序
+    // 着色器程序
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
-    //链接错误检查
+    // 链接错误检查
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
+                  << infoLog << std::endl;
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
@@ -103,14 +108,18 @@ int main() {
 
     glBindVertexArray(VAOs[0]);
     glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(firstTriangle), firstTriangle, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(firstTriangle), firstTriangle,
+                 GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                          (void *)0);
     glEnableVertexAttribArray(0);
 
     glBindVertexArray(VAOs[1]);
     glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(secondTriangle), secondTriangle, GL_STATIC_COPY);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(secondTriangle), secondTriangle,
+                 GL_STATIC_COPY);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                          (void *)0);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -119,8 +128,8 @@ int main() {
     // 渲染循环
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); //状态设置
-        glClear(GL_COLOR_BUFFER_BIT); //状态使用
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // 状态设置
+        glClear(GL_COLOR_BUFFER_BIT);         // 状态使用
 
         glUseProgram(shaderProgram);
         glBindVertexArray(VAOs[0]);
