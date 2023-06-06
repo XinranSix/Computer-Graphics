@@ -8,9 +8,7 @@ string(SUBSTRING ${CMAKE_CURRENT_SOURCE_DIR} ${idx} ${len} pre)
 foreach (var ${SRC_LIST})
     string(LENGTH ${var} len)
     string(SUBSTRING ${var} 2 ${len} post)
-    add_executable("${pre}o${post}" ${var})
-    target_link_libraries("${pre}o${post}" fmtd)
-    target_link_libraries("${pre}o${post}" opencv_world470d) 
+    add_executable("${pre}_${post}" ${var})
 endforeach ()
 
 
