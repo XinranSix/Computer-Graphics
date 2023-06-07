@@ -2,45 +2,14 @@
 
 using namespace std;
 
-class Score {
-private:
-    int mid_exam;
-    int fin_exam;
-    static int count;
-    static float sum;
-    static float ave;
-
-public:
-    Score(int m, int f);
-    ~Score();
-    static void show_count_sum_ave();
-};
-
-Score::Score(int m, int f) {
-    mid_exam = m;
-    fin_exam = f;
-    ++count;
-    sum += fin_exam;
-    ave = sum / count;
+// 设置递归终点, 当参数包解包完全, 适配空包
+void ShowList() { cout << endl; }
+// 递归形式调用解包, 每一次解出一个参数
+template <class T, class... Args> void ShowList(T &val, Args... args) {
+    cout << val << endl;
+    ShowList(args...);
 }
-
-Score::~Score() {}
-
-/*** 静态成员初始化 ***/
-int Score::count = 0;
-float Score::sum = 0.0;
-float Score::ave = 0.0;
-
-void Score::show_count_sum_ave() {
-    cout << "学生人数: " << count << endl;
-    cout << "期末累加成绩: " << sum << endl;
-    cout << "期末平均成绩: " << ave << endl;
-}
-
 int main() {
-    Score sco[3] = {Score(90, 89), Score(78, 99), Score(89, 88)};
-    sco[2].show_count_sum_ave();
-    Score::show_count_sum_ave();
-
+    ShowList("dsadsa", 2, 5, 6, "edsad");
     return 0;
 }
