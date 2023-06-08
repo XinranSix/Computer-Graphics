@@ -10,15 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    widget.cpp
+    dialog.cpp
 
 HEADERS += \
-    widget.h
+    dialog.h
 
 FORMS += \
-    widget.ui
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc
+
+RC_ICONS = editor.ico
