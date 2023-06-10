@@ -4,8 +4,7 @@ using namespace std;
 
 void ShowList() { cout << endl; }
 
-template <class T, class... Args>
-void ShowList(T& val, Args... args)
+template <class T, class... Args> void ShowList(T &val, Args... args) 
 {
     cout << val << endl;
     ShowList(args...);
@@ -19,7 +18,7 @@ int main() {
     return 0;
 }
 
-class Perosn {
+class Perosn { 
 private:
     int ages;
 };

@@ -15,13 +15,15 @@
 
 using namespace std;
 
+ostream &operator<<(ostream &os, QString str) {
+  return os << str.toStdString();
+}
+
 int main() {
-  QRandomGenerator *rand1 =
-      new QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
-  QRandomGenerator *rand2 =
-      new QRandomGenerator(QDateTime::currentMSecsSinceEpoch());
-  for (int i = 0; i < 5; ++i) {
-    cout << rand1->generate() << ' ' << rand2->generate() << endl;
-  }
+  QString str1 = "Hello ";
+  QString str2 = "World";
+  QString str3 = str1 + str2;
+  cout << str1 << endl << str2 << endl << str3 << endl;
+
   return 0;
 }
