@@ -107,7 +107,35 @@ void link_insert_num(STU **p_head, STU *p_new) {
     }
 }
 
-void link_sort(STU **p_head) {}
+void link_order(STU *head) {
+    STU *pb, *pf, temp;
+    pf = head;
+    if (head == NULL) {
+        printf("链表为空，不用排序\n");
+        return;
+    }
+    if (head->next == NULL) {
+        printf("只有一个节点，不用排序\n");
+        return;
+    }
+    while (pf->next != NULL) {
+        pb = pf->next;
+        while (pb != NULL) {
+            if (pf->num > pb->num) {
+                temp = *pb;
+                *pb = *pf;
+                *pf = temp;
+
+                temp.next = pb->next;
+                pb->next = pf->next;
+                pf->next = temp.next;
+            }
+            pb = pb->next;
+        }
+    }
+}
+
+void link_revers(STU *head) {}
 
 int main(int argc, char *argv[]) {
     STU *head = NULL, *p_new = NULL;

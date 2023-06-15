@@ -1,6 +1,10 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {  
-	printf("Hello Main10");
-	return 0; 
+int main(int argc, char *argv[]) {
+
+    char ch[32] = "";
+    scanf("%s", ch);
+    printf("ch = %s\n", ch);
+
+    return 0;
 }
