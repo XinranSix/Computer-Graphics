@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+void fun(int (*p)[5], int x, int y) { p[0][1] = 101; }
 
-    int a = 100;
-    int *p = &a;
-    int **q = &p;
-
-    printf("a = %d %d %d\n", a, *p, **q);
-    printf("&a = %p %p %p\n", &a, p, *q);
-    printf("&p = %p %p\n", &p, q);
-    printf("&q = %p\n", &q);
-
+int main() {
+    int a[3][5] = {0};
+    fun(a, 3, 5);
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
