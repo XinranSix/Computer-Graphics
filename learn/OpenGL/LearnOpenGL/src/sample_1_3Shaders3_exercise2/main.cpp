@@ -1,3 +1,11 @@
+/**
+ * @File    :   main.cpp
+ * @Time    :   2023/06/17 22:59:39
+ * @Author  :   yaojie
+ * @Version :   1.0
+ * @Desc    :   None
+ */
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -6,11 +14,8 @@
 
 void processInput(GLFWwindow *window);
 
-float vertices[] = {
-        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-};
+float vertices[] = {-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f,
+                    0.0f,  1.0f,  0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,  1.0f};
 
 int main() {
     glfwInit();
@@ -26,12 +31,12 @@ int main() {
         glfwTerminate();
         return -1;
     }
-    //GLFW将窗口的上下文设置为当前线程的上下文
+    // GLFW将窗口的上下文设置为当前线程的上下文
     glfwMakeContextCurrent(window);
 
-    //GLAD
+    // GLAD
     // glad: 加载所有OpenGL函数指针
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
@@ -51,10 +56,12 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     //告知Shader如何解析缓冲里的属性值
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                          (void *)0);
     //开启VAO管理的第一个属性值
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (sizeof(float) * 3));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                          (void *)(sizeof(float) * 3));
     //开启VAO管理的第一个属性值
     glEnableVertexAttribArray(1);
 
@@ -65,7 +72,7 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f); //状态设置
-        glClear(GL_COLOR_BUFFER_BIT); //状态使用
+        glClear(GL_COLOR_BUFFER_BIT);         //状态使用
 
         shader.use();
         shader.setFloat("xoffset", 0.5f);

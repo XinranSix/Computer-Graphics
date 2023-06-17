@@ -1,8 +1,15 @@
+/**
+ * @File    :   main.cpp
+ * @Time    :   2023/06/17 22:58:59
+ * @Author  :   yaojie
+ * @Version :   1.0
+ * @Desc    :   None
+ */
+
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <fmt/core.h>
-#include <glad/glad.h>
 #include <iostream>
-
 
 void processInput(GLFWwindow *window);
 
