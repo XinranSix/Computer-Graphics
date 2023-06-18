@@ -1,0 +1,37 @@
+"filename", "language", "C++", "CMake Cache", "JSON", "Makefile", "CMake", "XML", "Log", "YAML", "TypeScript", "C", "comment", "blank", "total"
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\query\client-vscode\query.json", "JSON", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\cache-v2-22f8ba38f913e7de351b.json", "JSON", 0, 0, 1563, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1564
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\cmakeFiles-v1-1f3fcc361983e296c213.json", "JSON", 0, 0, 175, 0, 0, 0, 0, 0, 0, 0, 0, 1, 176
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\codemodel-v2-690ece489132d39a3a49.json", "JSON", 0, 0, 92, 0, 0, 0, 0, 0, 0, 0, 0, 1, 93
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\directory-.-Debug-d0094a50bb2071803777.json", "JSON", 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\directory-src-Debug-c94b7c2814d5a21df52c.json", "JSON", 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\directory-src.test-Debug-f24e00b7602ac2d4a339.json", "JSON", 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\index-2023-06-18T11-26-39-0937.json", "JSON", 0, 0, 132, 0, 0, 0, 0, 0, 0, 0, 0, 1, 133
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\target-test_test1.cpp-Debug-263c9c2201afb27d330c.json", "JSON", 0, 0, 144, 0, 0, 0, 0, 0, 0, 0, 0, 1, 145
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\.cmake\api\v1\reply\toolchains-v1-21da83d0c5b796b7dcb3.json", "JSON", 0, 0, 137, 0, 0, 0, 0, 0, 0, 0, 0, 1, 138
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeCache.txt", "CMake Cache", 0, 391, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 482
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CMakeCCompiler.cmake", "CMake", 0, 0, 0, 0, 55, 0, 0, 0, 0, 0, 0, 18, 73
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CMakeCXXCompiler.cmake", "CMake", 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 20, 84
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CMakeRCCompiler.cmake", "CMake", 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 1, 7
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CMakeSystem.cmake", "CMake", 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 5, 16
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CompilerIdCXX\CMakeCXXCompilerId.cpp", "C++", 648, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 145, 856
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\3.26.3\CompilerIdC\CMakeCCompilerId.c", "C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 659, 61, 147, 867
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\CMakeConfigureLog.yaml", "YAML", 0, 0, 0, 0, 0, 0, 0, 581, 0, 0, 4, 26, 611
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\CMakeDirectoryInformation.cmake", "CMake", 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 5, 17
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\CMakeFiles\Makefile.cmake", "CMake", 0, 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 6, 59
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\Makefile", "Makefile", 0, 0, 0, 69, 0, 0, 0, 0, 0, 0, 44, 41, 154
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\Testing\20230618-0741\Test.xml", "XML", 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 1, 35
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\Testing\Temporary\LastTest_20230618-0741.log", "Log", 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\cmake_install.cmake", "CMake", 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 10, 56
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\compile_commands.json", "JSON", 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\CMakeFiles\CMakeDirectoryInformation.cmake", "CMake", 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 5, 17
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\Makefile", "Makefile", 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 40, 38, 140
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\cmake_install.cmake", "CMake", 0, 0, 0, 0, 37, 0, 0, 0, 0, 0, 0, 9, 46
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\CMakeFiles\CMakeDirectoryInformation.cmake", "CMake", 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 5, 17
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\CMakeFiles\test_test1.cpp.dir\DependInfo.cmake", "CMake", 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 6, 20
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\CMakeFiles\test_test1.cpp.dir\cmake_clean.cmake", "CMake", 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 2, 14
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\CMakeFiles\test_test1.cpp.dir\compiler_depend.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 3
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\Makefile", "Makefile", 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 46, 47, 182
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\build\src\test\cmake_install.cmake", "CMake", 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 7, 40
+"d:\workspace\MyRepositories\Computer-Graphics\learn\CPP\src\test\test1.cpp", "C++", 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 10
+"Total", "-", 655, 391, 2294, 220, 367, 34, 3, 581, 2, 659, 258, 649, 6113
