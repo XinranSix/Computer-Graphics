@@ -1,7 +1,7 @@
 {
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "clangd.fallbackFlags": [
-        "-Id:/software/vcpkg/installed/x64-windows/include",
-        "-I${workspaceFolder}/include"
-    ]
+    // "clangd.fallbackFlags": [
+    //     "-Id:/software/vcpkg/installed/x64-windows/include",
+    //     "-I${workspaceFolder}/include"
+    // ]
 }

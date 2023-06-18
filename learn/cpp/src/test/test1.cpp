@@ -1,13 +1,14 @@
-/**
- * @file    :   test1.cpp
- * @date    :   2023/06/18 12:24:18
- * @author  :   yaojie
- * @version :   1.0
- */
-
 #include <iostream>
 
+using namespace std;
+
 int main() {
-    std::cout << "Hello World" << std::endl;
+
+    const int a = 10;
+    // a = 100;
+    int *p = (int *)&a;
+    *p = 100;
+    cout << a << endl;
+    cout << *p << endl;
     return 0;
 }

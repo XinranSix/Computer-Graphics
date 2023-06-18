@@ -97,7 +97,7 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 MacroBlockBegin: ''
 MacroBlockEnd:   ''
 MaxEmptyLinesToKeep: 1
-NamespaceIndentation: None
+NamespaceIndentation: All
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
 ObjCBreakBeforeNestedBlockParam: true
@@ -113,7 +113,7 @@ PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
 ReflowComments:  true
-SortIncludes:    true
+SortIncludes:    false
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
