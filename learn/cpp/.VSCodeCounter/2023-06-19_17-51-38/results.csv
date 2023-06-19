@@ -1,0 +1,10 @@
+"filename", "language", "CMake", "CMake Cache", "comment", "blank", "total"
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/CMakeCache.txt", "CMake Cache", 0, 297, 0, 64, 361
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/CMakeFiles/3.16.3/CMakeCCompiler.cmake", "CMake", 60, 0, 0, 17, 77
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/CMakeFiles/3.16.3/CMakeCXXCompiler.cmake", "CMake", 70, 0, 0, 19, 89
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/CMakeFiles/3.16.3/CMakeSystem.cmake", "CMake", 10, 0, 0, 6, 16
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/cmake_install.cmake", "CMake", 46, 0, 0, 10, 56
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/src/cmake_install.cmake", "CMake", 38, 0, 0, 9, 47
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/src/test/cmake_install.cmake", "CMake", 33, 0, 0, 7, 40
+"/home/lxr/workspace/Computer-Graphics/learn/cpp/build/src/test2/cmake_install.cmake", "CMake", 33, 0, 0, 7, 40
+"Total", "-", 290, 297, 0, 139, 726
