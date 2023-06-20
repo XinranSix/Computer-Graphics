@@ -22,17 +22,14 @@ public:
         return *this;
     }
 
+    int operator()(int a, int b) { return a + b; }
+
 public:
     int age;
     char *name;
 };
 
-void test01() {
-    Person p1{10, "bob"};
-    Person p2;
-    p2 = p1;
-    cout << p2.age << ' ' << p2.name << endl;
-}
+void test01() { cout << Person()(3, 4) << endl; }
 
 int main() {
     test01();
