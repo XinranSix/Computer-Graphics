@@ -1,14 +1,14 @@
-#include <boost/version.hpp>
-#include <boost/config.hpp>
-
+#include <boost/asio.hpp>
 #include <iostream>
 
-using namespace std;
+void handler(const boost::system::error_code &ec) {
+    std::cout << "5 s." << std::endl;
+}
 
 int main() {
-    cout << BOOST_VERSION << endl;
-    cout << BOOST_LIB_VERSION << endl;
-    cout << BOOST_STDLIB << endl;
-    cout << BOOST_PLATFORM << endl;
-    cout << BOOST_COMPILER << endl;
+    boost::asio::io_service io_service;
+    boost::asio::deadline_timer timer(io_service,
+                                      boost::posix_time::seconds(5));
+    timer.async_wait(handler);
+    io_service.run();
 }
