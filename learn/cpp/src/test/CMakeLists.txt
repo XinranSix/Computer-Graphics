@@ -8,7 +8,7 @@ string(SUBSTRING ${CMAKE_CURRENT_SOURCE_DIR} ${idx} ${len} pre)
 foreach (var ${SRC_LIST})
     string(LENGTH ${var} len)
     string(SUBSTRING ${var} 2 ${len} post)
-    add_executable("${pre}_${post}" ${var})
+    add_executable("${pre}_${post}" ${var} we.h)
 endforeach ()
 
 
