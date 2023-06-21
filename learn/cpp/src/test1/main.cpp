@@ -1,16 +1,11 @@
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
 void test01() {
-
-    vector<int> v{1, 2, 3, 4, 5};
-    v.push_back(6);
-
-    for (int &it : v) {
-        cout << it << ' ';
-    }
+    string str;
+    string str1("geloxma");
 }
 
 int main() {
