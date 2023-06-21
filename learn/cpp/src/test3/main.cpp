@@ -1,37 +1,20 @@
 #include <iostream>
-#include <memory>
-#include <cstring>
+#include "vec2.h"
 
 using namespace std;
 
-class Person {
-public:
-    Person() {}
-    Person(int age1, char *name1) {
-        age = age1;
-        name = new char[strlen(name1) + 1];
-        strcpy(name, name1);
-    }
-    ~Person() { delete[] name; }
+void test01() {
+    Vec2 v1{1, 2};
+    cout << v1 << endl;
+}
 
-public:
-    Person &operator=(Person &p) {
-        this->age = p.age;
-        name = new char[strlen(p.name) + 1];
-        strcpy(name, p.name);
-        return *this;
-    }
-
-    int operator()(int a, int b) { return a + b; }
-
-public:
-    int age;
-    char *name;
-};
-
-void test01() { cout << Person()(3, 4) << endl; }
+void test02() {
+    Vec2 v1 = {1, 2};
+    cout << v1 << endl;
+}
 
 int main() {
     test01();
+    test02();
     return 0;
 }

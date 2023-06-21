@@ -1,1 +1,1 @@
-add_executable(test3 main.cpp)
+add_executable(test3 main.cpp vec2.cpp)
