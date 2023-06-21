@@ -8,7 +8,7 @@
 #include "vec2.h"
 #include <cmath>
 
-Vec2::Vec2() {}
+Vec2::Vec2() : x(0), y(0) {}
 
 Vec2::Vec2(double x, double y) : x(x), y(y) {}
 
@@ -19,7 +19,7 @@ Vec2::Vec2(const Vec2 &v) {
 
 Vec2::~Vec2() {}
 
-double Vec2::length() { return fsqrt(x * x + y * y); }
+double Vec2::length() const { return fsqrt(x * x + y * y); }
 
 Vec2 &Vec2::operator=(const Vec2 &v) {
     x = v.x;
@@ -53,7 +53,7 @@ Vec2 &Vec2::operator/=(const Vec2 &v) {
 
 Vec2 &Vec2::operator+() { return *this; }
 
-Vec2 Vec2::operator-() { return Vec2{-x, -y}; }
+Vec2 Vec2::operator-() const { return Vec2{-x, -y}; }
 
 Vec2 &Vec2::operator++() {
     x = x + 1;
@@ -98,7 +98,7 @@ Vec2 operator/(const Vec2 &v1, const Vec2 &v2) {
 }
 
 bool operator==(const Vec2 &v1, const Vec2 &v2) {
-    return fabs(v1.x - v2.x) < 0.01 && fabs(v1.y - v2.y);
+    return fabs(v1.x - v2.x) < 0.01 && fabs(v1.y - v2.y) < 0.01;
 }
 
 bool operator!=(const Vec2 &v1, const Vec2 &v2) { return !(v1 == v2); }

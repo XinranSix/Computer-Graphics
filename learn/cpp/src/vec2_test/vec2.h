@@ -18,7 +18,7 @@ public:
     ~Vec2();
 
 public:
-    double length();
+    double length() const;
 
 public:
     Vec2 &operator=(const Vec2 &v);
@@ -28,7 +28,7 @@ public:
     Vec2 &operator/=(const Vec2 &v);
 
     Vec2 &operator+();
-    Vec2 operator-();
+    Vec2 operator-() const;
     Vec2 &operator++();
     Vec2 operator++(int);
     Vec2 &operator--();
