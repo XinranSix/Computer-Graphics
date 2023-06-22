@@ -1,14 +1,8 @@
+#include "fmt/format.h"
 #include <iostream>
-#include <string>
-
-using namespace std;
-
-void test01() {
-    string str;
-    string str1("geloxma");
-}
 
 int main() {
-    test01();
+    std::string s = fmt::format("{0}is{1}", "abra", 12);
+    std::cout << s << std::endl;
     return 0;
 }
