@@ -17,7 +17,6 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget()
 {
-
 }
 
 void Widget::button_cb()
