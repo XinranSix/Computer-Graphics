@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    sonwidget.cpp \
     widget.cpp
 
 HEADERS += \
+    sonwidget.h \
     widget.h
 
 # Default rules for deployment.

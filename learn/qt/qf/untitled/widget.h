@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "sonwidget.h"
 #include <QPushButton>
 
 class Widget : public QWidget
@@ -11,5 +12,11 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
+    SonWidget *sonWindown;
+    QPushButton*button1;
+
+public slots:
+    void button_cb();
+    void signal_cb();
 };
 #endif // WIDGET_H
