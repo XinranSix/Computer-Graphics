@@ -13,5 +13,5 @@ SUBDIRLIST(SUBDIRS ${PROJECT_SOURCE_DIR}/src)
 
 FOREACH (subdir ${SUBDIRS})
     ADD_SUBDIRECTORY(${subdir})
-    MESSAGE("${subdir}")
+#    MESSAGE("${subdir}")
 ENDFOREACH ()
